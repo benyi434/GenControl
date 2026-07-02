@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GenControl S.A. — Servicios Industriales. Soluciones de ingeniería, equipamiento y proyectos de alta complejidad con cobertura nacional." />
+  <meta name="theme-color" content="#09090B" />
+  <title>GenControl S.A. — Servicios Industriales · Ingeniería & Equipamiento</title>
+
+  <!-- Favicon SVG inline (eco visual del isotipo) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='none' stroke='%231d4ed8' stroke-width='3'/><path d='M32 14a18 18 0 1 1-12.7 5.3' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/><path d='M32 22a10 10 0 1 0 7.07 2.93' fill='none' stroke='%23dc2626' stroke-width='5' stroke-linecap='round'/><circle cx='32' cy='32' r='3' fill='%233b82f6'/></svg>" />
+
+  <!-- ============================================================ -->
+  <!-- INTER · Google Fonts (pesos 400, 500, 600, 700, 800, 900)     -->
+  <!-- ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================ -->
+  <!-- TAILWINDCSS · CDN con configuración personalizada            -->
+  <!-- ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            // ==== Tokens derivados del logo (función rgb con <alpha-value>) ==== //
+            // Estos permiten usar modificadores de opacidad:  bg-bg/70, bg-surface/30, etc.
+            bg:       'rgb(9 9 11 / <alpha-value>)',      // fondo principal (zinc-950)
+            surface:  'rgb(24 24 27 / <alpha-value>)',     // tarjetas (zinc-900)
+            surface2: 'rgb(31 31 35 / <alpha-value>)',     // tarjetas elevadas / hover
+            border:   'rgb(39 39 42 / <alpha-value>)',     // bordes sutiles (zinc-800)
+            muted:    'rgb(161 161 170 / <alpha-value>)',  // textos secundarios (zinc-400)
+            subtle:   'rgb(113 113 122 / <alpha-value>)',  // textos terciarios (zinc-500)
+            // ==== Acentos (paleta azul del logo, rojo para detalles) ==== //
+            brand: {
+              DEFAULT: 'rgb(29 78 216 / <alpha-value>)',   // azul principal #1d4ed8
+              50:  'rgb(239 246 255 / <alpha-value>)',
+              100: 'rgb(219 234 254 / <alpha-value>)',
+              200: 'rgb(191 219 254 / <alpha-value>)',
+              300: 'rgb(147 197 253 / <alpha-value>)',
+              400: 'rgb(96 165 250 / <alpha-value>)',
+              500: 'rgb(59 130 246 / <alpha-value>)',
+              600: 'rgb(37 99 235 / <alpha-value>)',
+              700: 'rgb(29 78 216 / <alpha-value>)',
+              800: 'rgb(30 64 175 / <alpha-value>)',
+              900: 'rgb(30 58 138 / <alpha-value>)',
+            },
+            accent: 'rgb(220 38 38 / <alpha-value>)',     // rojo del logo — sólo acentos pequeños
+          },
+          letterSpacing: {
+            'tightest': '-0.04em',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- ESTILOS PERSONALIZADOS · Base, animaciones, utilitarios     -->
+  <!-- ============================================================ -->
+  <style>
+    /* ===== Reset suave + tipografía base ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      background: #09090B;
+      color: #E4E4E7;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-feature-settings: 'ss01', 'cv11';
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: #1d4ed8; color: white; }
+
+    /* ===== Custom scrollbar (discreta) ===== */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #09090B; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* ===== Reveal inicial: las secciones aparecen animadas ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Delays para escalonar hijos */
+    .reveal-d1 { transition-delay: .08s; }
+    .reveal-d2 { transition-delay: .16s; }
+    .reveal-d3 { transition-delay: .24s; }
+    .reveal-d4 { transition-delay: .32s; }
+    .reveal-d5 { transition-delay: .40s; }
+
+    /* ===== Halo brillante azul (sombras suaves premium) ===== */
+    .glow-blue {
+      box-shadow:
+        0 0 0 1px rgba(59,130,246,.18),
+        0 12px 40px -12px rgba(29,78,216,.45),
+        inset 0 1px 0 0 rgba(255,255,255,.04);
+    }
+    .glow-blue-strong {
+      box-shadow:
+        0 0 0 1px rgba(59,130,246,.35),
+        0 24px 70px -16px rgba(29,78,216,.65),
+        inset 0 1px 0 0 rgba(255,255,255,.06);
+    }
+    .glow-red {
+      box-shadow: 0 0 24px -4px rgba(220,38,38,.55);
+    }
+
+    /* ===== Card lift (hover elegante) ===== */
+    .card-lift {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease, background-color .35s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,.4);
+      background-color: #1F1F23;
+    }
+
+    /* ===== Línea doble bajo headers (eco visual del wordmark) ===== */
+    .double-underline {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 14px;
+    }
+    .double-underline::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 56px; height: 3px;
+      background: linear-gradient(90deg, #1d4ed8, transparent);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(29,78,216,.6);
+    }
+    .double-underline::before {
+      content: '';
+      position: absolute;
+      left: 64px; bottom: 5px;
+      width: 28px; height: 2px;
+      background: #dc2626;
+      border-radius: 2px;
+      opacity: .8;
+    }
+
+    /* ===== Fondo técnico con grilla sutil para el hero ===== */
+    .tech-grid {
+      background-image:
+        linear-gradient(rgba(59,130,246,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* ===== Halo circular del logo (animación lenta) ===== */
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: .6; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.05); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,.55); }
+      50%      { box-shadow: 0 0 0 8px rgba(59,130,246,0); }
+    }
+    @keyframes flow {
+      0%   { stroke-dashoffset: 60; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes float-y {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    .anim-spin-slow     { animation: spin-slow 24s linear infinite; }
+    .anim-spin-reverse  { animation: spin-reverse 30s linear infinite; }
+    .anim-pulse-glow    { animation: pulse-glow 4s ease-in-out infinite; }
+    .anim-pulse-dot     { animation: pulse-dot 2.4s ease-in-out infinite; }
+    .anim-flow          { stroke-dasharray: 6 6; animation: flow 2s linear infinite; }
+    .anim-float         { animation: float-y 5s ease-in-out infinite; }
+
+    /* ===== Etiqueta monoespaciada tipo "instrumento" ===== */
+    .tag-mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ===== Botones premium ===== */
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      box-shadow: 0 8px 24px -8px rgba(29,78,216,.7), inset 0 1px 0 0 rgba(255,255,255,.18);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 32px -8px rgba(29,78,216,.85), inset 0 1px 0 0 rgba(255,255,255,.22);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.02);
+      color: #E4E4E7;
+      border: 1px solid #27272A;
+      transition: all .25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,.06);
+      color: white;
+    }
+
+    /* ===== Línea de tiempo (timeline) ===== */
+    .timeline-line {
+      background: linear-gradient(180deg, rgba(59,130,246,.0) 0%, rgba(59,130,246,.6) 12%, rgba(59,130,246,.6) 88%, rgba(59,130,246,.0) 100%);
+    }
+    .timeline-dot {
+      background: #09090B;
+      border: 2px solid #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+    }
+    .timeline-dot.is-key {
+      background: #1d4ed8;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 6px rgba(59,130,246,.25), 0 0 24px rgba(59,130,246,.6);
+    }
+
+    /* ===== Logos de clientes: grayscale → color ===== */
+    .client-logo {
+      filter: grayscale(1) brightness(.85) contrast(.9);
+      opacity: .55;
+      transition: filter .5s ease, opacity .5s ease, transform .35s ease;
+    }
+    .client-logo:hover {
+      filter: grayscale(0) brightness(1) contrast(1);
+      opacity: 1;
+    }
+
+    /* ===== Floating buttons ===== */
+    .fab {
+      transition: width .35s cubic-bezier(.16,1,.3,1), padding .35s ease, transform .25s ease;
+    }
+    .fab .label { opacity: 0; max-width: 0; transition: max-width .35s ease, opacity .25s ease; overflow: hidden; white-space: nowrap; }
+    .fab:hover .label { opacity: 1; max-width: 200px; margin-left: .6rem; }
+    .fab:hover { transform: translateY(-2px); }
+
+    /* ===== Línea animada que recorre el header sticky ===== */
+    .header-line {
+      background: linear-gradient(90deg, transparent, #1d4ed8, #dc2626, transparent);
+      height: 1px;
+    }
+
+    /* ===== Backdrop blur para el header sticky ===== */
+    .header-blur {
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+    }
+
+    /* ===== Borde decorativo en bloques destacados ===== */
+    .featured-border {
+      position: relative;
+    }
+    .featured-border::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(29,78,216,.7), rgba(220,38,38,.4), rgba(29,78,216,.0));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ===== Glow de proceso en líneas SVG ===== */
+    .neon-line {
+      stroke: #3b82f6;
+      filter: drop-shadow(0 0 4px rgba(59,130,246,.7));
+    }
+
+    /* ===== Pequeño separador con doble trazo (eco wordmark) ===== */
+    .wordmark-strip {
+      position: relative;
+      height: 12px;
+      width: 64px;
+    }
+    .wordmark-strip::before, .wordmark-strip::after {
+      content: ''; position: absolute; left: 0; right: 0;
+      height: 2px; border-radius: 2px;
+    }
+    .wordmark-strip::before { top: 0;    background: linear-gradient(90deg, #1d4ed8, transparent); }
+    .wordmark-strip::after  { top: 8px;   background: linear-gradient(90deg, #dc2626, transparent); height: 1.5px; }
+
+    /* ===== Soft text gradient para palabras destacadas ===== */
+    .text-gradient-blue {
+      background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .text-gradient-red {
+      background: linear-gradient(135deg, #fca5a5 0%, #dc2626 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ===== Reduce motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<!-- ================================================================ -->
+<!--  CUERPO DE LA PÁGINA                                              -->
+<!-- ================================================================ -->
+<body class="bg-bg text-zinc-200 antialiased">
+
+  <!-- ============================================================ -->
+  <!--  HEADER · Sticky, responsive, logo, menú, contacto, hamburger -->
+  <!-- ============================================================ -->
+  <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <!-- Línea superior con gradiente triple (azul → rojo → transparente) -->
+    <div class="header-line opacity-60"></div>
+
+    <div id="header-inner" class="header-blur bg-bg/70 border-b border-transparent transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
+
+        <!-- ===== Logo (SVG inline respetando el ADN visual) ===== -->
+        <a href="#hero" class="flex items-center gap-3 group" aria-label="GenControl — Inicio">
+          <!-- Isotipo: círculo con dos arcos entrelazados (azul + rojo) -->
+          <svg width="40" height="40" viewBox="0 0 64 64" class="transition-transform duration-500 group-hover:rotate-90" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stop-color="#1d4ed8"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
+            <!-- Anillo exterior -->
+            <circle cx="32" cy="32" r="28" stroke="url(#ringGrad)" stroke-width="2" stroke-dasharray="2 4"/>
+            <!-- Arcos interior (azul + rojo) — eco del logo sin copiarlo -->
+            <path d="M32 14 a18 18 0 1 1 -12.7 5.3" stroke="#1d4ed8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M32 22 a10 10 0 1 0 7.07 2.93" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <!-- Núcleo -->
+            <circle cx="32" cy="32" r="3" fill="#3b82f6"/>
+          </svg>
+          <!-- Wordmark -->
+          <div class="flex flex-col leading-none">
+            <span class="font-black tracking-tightest text-white text-lg lg:text-xl uppercase italic">GenControl</span>
+            <span class="tag-mono text-muted mt-1">Servicios Industriales</span>
+          </div>
+        </a>
+
+        <!-- ===== Navegación desktop ===== -->
+        <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+          <!--
+            NOTA: href="#" apunta a la sección por id.
+            Para agregar/quitar items, duplicar o borrar el bloque <a>.
+          -->
+          <a href="#quienes-somos"   class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Empresa</a>
+          <a href="#servicios"       class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Servicios</a>
+          <a href="#gases"           class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Gases</a>
+          <a href="#proyectos"       class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Proyectos</a>
+          <a href="#clientes"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Clientes</a>
+          <a href="#sectores"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Sectores</a>
+          <a href="#contacto"        class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
+            Contacto
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </nav>
+
+        <!-- ===== Botón hamburguesa (mobile) ===== -->
+        <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+                class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border bg-surface/60 hover:bg-surface transition-colors">
+          <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- ===== Menú móvil desplegable ===== -->
+      <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-bg/95 backdrop-blur">
+        <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1" aria-label="Navegación móvil">
+          <a href="#quienes-somos"   class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Empresa</a>
+          <a href="#servicios"       class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Servicios</a>
+          <a href="#gases"           class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Gases Especiales</a>
+          <a href="#proyectos"       class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Proyectos</a>
+          <a href="#clientes"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Clientes</a>
+          <a href="#sectores"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Sectores</a>
+          <a href="#contacto"        class="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold btn-primary">Ir a contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer invisible para que el contenido no quede debajo del header sticky -->
+  <div class="h-16 lg:h-20" aria-hidden="true"></div>
+
+
+  <main>
+
+    <!-- ============================================================ -->
+    <!--  HERO · Vende confianza — composición técnica a la derecha    -->
+    <!-- ============================================================ -->
+    <section id="hero" class="relative overflow-hidden">
+      <!-- Fondo: grilla técnica + glow radial -->
+      <div class="absolute inset-0 tech-grid pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg pointer-events-none"></div>
+      <div class="absolute -top-32 right-[-10%] w-[40rem] h-[40rem] rounded-full bg-brand-700/20 blur-[120px] pointer-events-none"></div>
+      <div class="absolute top-1/2 left-[-10%] w-[30rem] h-[30rem] rounded-full bg-brand-500/10 blur-[100px] pointer-events-none"></div>
+
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-14 lg:pt-24 pb-20 lg:pb-32">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+          <!-- ===== Columna texto ===== -->
+          <div class="lg:col-span-7 reveal">
+            <!-- Etiqueta superior -->
+            <div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full bg-surface/70 border border-border backdrop-blur">
+              <span class="relative flex w-2 h-2">
+                <span class="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70"></span>
+                <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-400"></span>
+              </span>
+              <span class="tag-mono text-zinc-300">Ingeniería · Equipamiento · Automatización</span>
+            </div>
+
+            <!-- Título principal — palabra destacada con gradiente azul -->
+            <h1 class="mt-6 font-black tracking-tightest text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] text-white">
+              Soluciones <span class="text-gradient-blue">Industriales</span><br />
+              para Proyectos de<br />
+              <span class="text-gradient-blue">Alta Complejidad.</span>
+            </h1>
+
+            <!-- Subtítulo -->
+            <p class="mt-6 max-w-2xl text-lg lg:text-xl text-zinc-400 leading-relaxed">
+              Desarrollamos ingeniería, equipamiento y servicios industriales para empresas que
+              necesitan resultados confiables. Más de <span class="text-white font-semibold">30 años</span>
+              de experiencia trabajando con estándares exigentes.
+            </p>
+
+            <!-- CTAs -->
+            <div class="mt-9 flex flex-wrap items-center gap-4">
+              <a href="#contacto" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-md text-sm font-semibold btn-primary">
+                Iniciar un proyecto
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#servicios" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-md text-sm font-semibold btn-ghost">
+                Ver capacidades técnicas
+              </a>
+            </div>
+
+            <!-- Mini indicadores de confianza -->
+            <div class="mt-12 grid grid-cols-3 max-w-xl gap-6 pt-8 border-t border-border">
+              <div>
+                <div class="font-black text-2xl text-white">+30</div>
+                <div class="tag-mono text-muted mt-1">Años</div>
+              </div>
+              <div class="border-l border-border pl-6">
+                <div class="font-black text-2xl text-white">Nacional</div>
+                <div class="tag-mono text-muted mt-1">Cobertura</div>
+              </div>
+              <div class="border-l border-border pl-6">
+                <div class="font-black text-2xl text-white">ICP · IRAM</div>
+                <div class="tag-mono text-muted mt-1">Estándares</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== Columna composición técnica (derecha) ===== -->
+          <div class="lg:col-span-5 reveal reveal-d2">
+            <div class="relative aspect-square max-w-[560px] mx-auto">
+
+              <!-- Anillo exterior animado -->
+              <div class="absolute inset-0 anim-spin-slow">
+                <svg viewBox="0 0 400 400" class="w-full h-full" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="ringGrad2" x1="0" x2="1">
+                      <stop offset="0%"  stop-color="#1d4ed8" stop-opacity=".8"/>
+                      <stop offset="50%" stop-color="#3b82f6" stop-opacity=".4"/>
+                      <stop offset="100%" stop-color="#1d4ed8" stop-opacity=".0"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="200" cy="200" r="190" fill="none" stroke="url(#ringGrad2)" stroke-width="1.5" stroke-dasharray="3 8"/>
+                  <!-- Marcas (ticks) -->
+                  <g stroke="#3b82f6" stroke-width="1" opacity=".4">
+                    <line x1="200" y1="14" x2="200" y2="22"/>
+                    <line x1="386" y1="200" x2="378" y2="200"/>
+                    <line x1="200" y1="386" x2="200" y2="378"/>
+                    <line x1="14" y1="200" x2="22" y2="200"/>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Anillo interior (rotación inversa) -->
+              <div class="absolute inset-8 anim-spin-reverse">
+                <svg viewBox="0 0 400 400" class="w-full h-full" aria-hidden="true">
+                  <circle cx="200" cy="200" r="178" fill="none" stroke="#27272A" stroke-width="1" stroke-dasharray="1 6"/>
+                </svg>
+              </div>
+
+              <!-- Tarjeta central: el "tablero industrial" -->
+              <div class="absolute inset-[18%] rounded-2xl border border-border bg-surface/80 backdrop-blur-xl glow-blue-strong overflow-hidden">
+                <!-- Cabecera del panel -->
+                <div class="flex items-center justify-between px-4 py-3 border-b border-border bg-black/30">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent glow-red"></span>
+                    <span class="tag-mono text-zinc-300">PANEL · CTRL-01</span>
+                  </div>
+                  <div class="flex gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span class="w-2 h-2 rounded-full bg-brand-500 anim-pulse-dot"></span>
+                  </div>
+                </div>
+                <!-- Cuerpo del panel: indicadores -->
+                <div class="p-4 space-y-3">
+                  <!-- Línea 1: medidor -->
+                  <div class="flex items-center gap-3">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" class="shrink-0"><path d="M12 3a9 9 0 1 0 9 9" stroke-linecap="round"/><path d="M12 12l4-4" stroke-linecap="round"/></svg>
+                    <div class="flex-1">
+                      <div class="flex justify-between"><span class="tag-mono text-zinc-400">RPM</span><span class="tag-mono text-white">1.480</span></div>
+                      <div class="h-1.5 mt-1.5 rounded-full bg-border overflow-hidden">
+                        <div class="h-full w-3/4 bg-gradient-to-r from-brand-700 to-brand-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Línea 2: medidor -->
+                  <div class="flex items-center gap-3">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" class="shrink-0"><path d="M3 12h4l3-7 4 14 3-7h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div class="flex-1">
+                      <div class="flex justify-between"><span class="tag-mono text-zinc-400">KW·H</span><span class="tag-mono text-white">2.450</span></div>
+                      <div class="h-1.5 mt-1.5 rounded-full bg-border overflow-hidden">
+                        <div class="h-full w-1/2 bg-gradient-to-r from-brand-700 to-brand-400 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Línea 3: status -->
+                  <div class="flex items-center justify-between rounded-md bg-black/40 border border-border px-3 py-2">
+                    <span class="tag-mono text-zinc-400">ESTADO</span>
+                    <span class="tag-mono text-emerald-400">OPERATIVO</span>
+                  </div>
+                </div>
+                <!-- Grilla sutil al fondo -->
+                <div class="absolute inset-0 dot-grid opacity-30 pointer-events-none"></div>
+              </div>
+
+              <!-- Etiquetas flotantes alrededor del panel -->
+              <div class="absolute top-[8%] left-[6%] anim-float" style="animation-delay:.2s">
+                <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface/85 border border-border backdrop-blur">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                  <span class="tag-mono text-zinc-300">GEN-01</span>
+                </span>
+              </div>
+              <div class="absolute top-[16%] right-[2%] anim-float" style="animation-delay:.8s">
+                <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface/85 border border-border backdrop-blur">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span class="tag-mono text-zinc-300">LINE-220V</span>
+                </span>
+              </div>
+              <div class="absolute bottom-[14%] left-[2%] anim-float" style="animation-delay:1.4s">
+                <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface/85 border border-border backdrop-blur">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                  <span class="tag-mono text-zinc-300">SENSOR-ICP</span>
+                </span>
+              </div>
+              <div class="absolute bottom-[8%] right-[8%] anim-float" style="animation-delay:1.0s">
+                <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface/85 border border-border backdrop-blur">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                  <span class="tag-mono text-zinc-300">PLC ● OK</span>
+                </span>
+              </div>
+
+              <!-- Líneas/conexiones decorativas -->
+              <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 400" aria-hidden="true">
+                <g fill="none" class="anim-flow neon-line" stroke-width="1.2">
+                  <path d="M 60 60 L 110 110"/>
+                  <path d="M 340 80 L 280 130"/>
+                  <path d="M 80 340 L 140 290"/>
+                  <path d="M 320 320 L 270 270"/>
+                </g>
+                <!-- Pequeños nodos -->
+                <g fill="#3b82f6">
+                  <circle cx="60" cy="60" r="2.5"/>
+                  <circle cx="340" cy="80" r="2.5"/>
+                  <circle cx="80" cy="340" r="2.5"/>
+                  <circle cx="320" cy="320" r="2.5"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Borde inferior con doble trazo (eco wordmark) -->
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="wordmark-strip mx-auto opacity-70"></div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  QUIÉNES SOMOS                                                -->
+    <!-- ============================================================ -->
+    <section id="quienes-somos" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <!-- Encabezado -->
+          <div class="lg:col-span-5 reveal">
+            <span class="tag-mono text-brand-400">// Empresa</span>
+            <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+              Quiénes <span class="text-gradient-blue">somos</span>
+            </h2>
+            <div class="mt-3 wordmark-strip"></div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="lg:col-span-7 reveal reveal-d2">
+            <p class="text-lg lg:text-xl text-zinc-300 leading-relaxed">
+              GenControl S.A. es una empresa argentina especializada en
+              <span class="text-white font-semibold">ingeniería, equipamiento y servicios industriales</span>.
+             Trabajamos junto a clientes que requieren soluciones confiables, escalables y
+              técnicamente exigentes, en proyectos donde los detalles importan.
+            </p>
+            <p class="mt-5 text-lg text-zinc-400 leading-relaxed">
+              Combinamos experiencia, profesionalismo y un compromiso real con cada proyecto.
+              Nos adaptamos a las necesidades específicas de cada industria, ofreciendo un
+              acompañamiento integral — desde el relevamiento inicial hasta la puesta en marcha
+              y el soporte postventa.
+            </p>
+
+            <!-- Pilares -->
+            <div class="mt-10 grid sm:grid-cols-3 gap-3">
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">01</div>
+                <div class="mt-2 font-semibold text-white">Experiencia</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Trayectoria consolidada en proyectos de diversa escala.</p>
+              </div>
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">02</div>
+                <div class="mt-2 font-semibold text-white">Ingeniería</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Soluciones técnicas adaptadas a cada requerimiento.</p>
+              </div>
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">03</div>
+                <div class="mt-2 font-semibold text-white">Compromiso</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Acompañamiento real durante todo el ciclo del proyecto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  TRAYECTORIA · Timeline                                       -->
+    <!-- ============================================================ -->
+    <section id="trayectoria" class="py-24 lg:py-32 bg-gradient-to-b from-transparent via-surface/30 to-transparent border-y border-border">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Trayectoria</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Una historia <span class="text-gradient-blue">construida</span> con trabajo
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Más de tres décadas creciendo junto a la industria argentina.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="mt-16 relative">
+          <!-- Línea central -->
+          <div class="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px timeline-line"></div>
+
+          <!--
+            ESTRUCTURA DEL TIMELINE:
+            Duplicar un bloque <article> para agregar un nuevo hito.
+            Alternar clases: lg:flex-row  /  lg:flex-row-reverse
+            Para hito destacado añadir: is-key  al .timeline-dot
+          -->
+          <ol class="space-y-12 lg:space-y-16">
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12">
+                  <div class="font-black text-3xl lg:text-4xl text-white">1998</div>
+                  <div class="tag-mono text-brand-400 mt-2">Inicio de actividades</div>
+                </div>
+                <div class="lg:pl-12 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md">
+                    Nace el proyecto industrial a partir de un equipo técnico con experiencia
+                    en instalaciones y mantenimiento, sentando las bases del conocimiento
+                    que daría lugar a la empresa.
+                  </p>
+                </div>
+              </div>
+              <!-- Dot -->
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12 order-2 lg:order-1 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md lg:ml-auto">
+                    Ampliamos capacidades hacia automatización, tableros y grupos electrógenos.
+                    Primeros acuerdos con clientes industriales de referencia en la región.
+                  </p>
+                </div>
+                <div class="lg:pl-12 order-1 lg:order-2">
+                  <div class="font-black text-3xl lg:text-4xl text-white">Década 2000</div>
+                  <div class="tag-mono text-brand-400 mt-2">Expansión técnica</div>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+            <!-- Hito destacado -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12">
+                  <div class="font-black text-3xl lg:text-4xl text-white">2015</div>
+                  <div class="tag-mono text-accent mt-2">Hito institucional</div>
+                </div>
+                <div class="lg:pl-12 mt-3 lg:mt-0">
+                  <p class="text-zinc-300 leading-relaxed max-w-md">
+                    Se constituye formalmente <span class="text-white font-semibold">GenControl S.A.</span>,
+                    consolidando una estructura empresarial preparada para proyectos de mayor
+                    escala, alcance nacional y nuevos desafíos técnicos.
+                  </p>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot is-key"></span>
+            </li>
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12 order-2 lg:order-1 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md lg:ml-auto">
+                    Incorporamos representación técnica oficial de marcas estratégicas,
+                    incorporando nuevas líneas de negocio como gases especiales, telemetría
+                    y mantenimiento especializado.
+                  </p>
+                </div>
+                <div class="lg:pl-12 order-1 lg:order-2">
+                  <div class="font-black text-3xl lg:text-4xl text-white">Actualidad</div>
+                  <div class="tag-mono text-brand-400 mt-2">Consolidación</div>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  ESTADÍSTICAS · 4 tarjetas                                    -->
+    <!-- ============================================================ -->
+    <section id="estadisticas" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Indicadores</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Números que <span class="text-gradient-blue">respaldan</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-zinc-400">
+            Algunos indicadores clave. Los datos marcados como editables pueden ajustarse desde el objeto <span class="tag-mono text-white">CONFIG</span>.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Card -->
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/70 p-6 lg:p-7 card-lift relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-brand-700/20 blur-2xl"></div>
+            <div class="tag-mono text-brand-400">// Experiencia</div>
+            <div class="mt-4 flex items-end gap-2">
+              <span class="font-black text-5xl lg:text-6xl text-white tracking-tightest">+30</span>
+              <span class="pb-2 text-zinc-400 text-lg">años</span>
+            </div>
+            <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+              De trabajo continuo en el sector industrial argentino.
+            </p>
+          </div>
+
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/70 p-6 lg:p-7 card-lift relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-brand-700/20 blur-2xl"></div>
+            <div class="tag-mono text-brand-400">// Alcance</div>
+            <div class="mt-4 flex items-end gap-2">
+              <span class="font-black text-5xl lg:text-6xl text-white tracking-tightest">Nacional</span>
+            </div>
+            <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+              Proyectos ejecutados en distintos puntos del país.
+            </p>
+          </div>
+
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/70 p-6 lg:p-7 card-lift relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-accent/15 blur-2xl"></div>
+            <div class="tag-mono text-accent">// EDITABLE</div>
+            <div class="mt-4 flex items-end gap-2">
+              <span class="font-black text-5xl lg:text-6xl text-white tracking-tightest">+100</span>
+            </div>
+            <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+              Proyectos industriales desarrollados. <span class="text-zinc-500">(dato editable en CONFIG)</span>
+            </p>
+          </div>
+
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/70 p-6 lg:p-7 card-lift relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-brand-700/20 blur-2xl"></div>
+            <div class="tag-mono text-brand-400">// Soporte</div>
+            <div class="mt-4 flex items-end gap-2">
+              <span class="font-black text-5xl lg:text-6xl text-white tracking-tightest">24/7</span>
+            </div>
+            <p class="mt-4 text-sm text-zinc-400 leading-relaxed">
+              Soporte técnico especializado y respuesta postventa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  SERVICIOS · Ingeniería + Equipamiento                        -->
+    <!-- ============================================================ -->
+    <section id="servicios" class="py-24 lg:py-32 border-y border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Capacidades</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Servicios <span class="text-gradient-blue">técnicos</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Dos grandes divisiones que trabajan de manera articulada: <span class="text-white">Ingeniería</span> y <span class="text-white">Equipamiento</span>.
+          </p>
+        </div>
+
+        <div class="mt-14 grid lg:grid-cols-2 gap-6">
+
+          <!-- ============ INGENIERÍA ============ -->
+          <div class="reveal rounded-2xl border border-border bg-surface/60 p-6 lg:p-8 featured-border relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-700/10 via-transparent to-transparent pointer-events-none"></div>
+
+            <div class="relative flex items-center gap-4 pb-6 border-b border-border">
+              <div class="w-12 h-12 rounded-xl bg-brand-700/15 border border-brand-700/40 flex items-center justify-center glow-blue">
+                <!-- Icono -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20V8h4v12"/><path d="M11 20V4h4v16"/><path d="M17 20v-9h2v9"/></svg>
+              </div>
+              <div>
+                <h3 class="font-black text-2xl text-white tracking-tightest">INGENIERÍA</h3>
+                <div class="tag-mono text-brand-400 mt-1">Diseño · Proyecto · Ejecución</div>
+              </div>
+            </div>
+
+            <ul class="relative mt-6 grid sm:grid-cols-2 gap-3">
+              <!-- Cada item -->
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m7 7l4.3 4.3M1 12h6m10 0h6M4.2 19.8l4.3-4.3m7-7l4.3-4.3"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Instalaciones industriales</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h8"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Automatización</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h2M10 9h4M6 13h8M6 16h5"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Tableros</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 1.4 1.4 6-6a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4 2.6-2.6z"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Mantenimiento</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.7l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.7-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.7.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.7 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.7l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.7.3h.1a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5h.1a1.6 1.6 0 0 0 1.7-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.7v.1a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Certificaciones</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Telemetría</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- ============ EQUIPAMIENTO ============ -->
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-6 lg:p-8 featured-border relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"></div>
+
+            <div class="relative flex items-center gap-4 pb-6 border-b border-border">
+              <div class="w-12 h-12 rounded-xl bg-brand-700/15 border border-brand-700/40 flex items-center justify-center glow-blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-black text-2xl text-white tracking-tightest">EQUIPAMIENTO</h3>
+                <div class="tag-mono text-brand-400 mt-1">Suministro · Instalación · Servicio</div>
+              </div>
+            </div>
+
+            <ul class="relative mt-6 grid sm:grid-cols-2 gap-3">
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h1m16 0h1M12 3v1m0 16v1M5.6 5.6l.7.7m11.4 11.4l.7.7M5.6 18.4l.7-.7M18.4 5.6l-.7.7"/><circle cx="12" cy="12" r="4"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Grupos electrógenos</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="10" rx="2"/><path d="M9 8V5h6v3"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Compresores</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Cabinas térmicas</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M3 11l3-7h12l3 7"/><path d="M9 21v-5h6v5"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Portones rápidos</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Gases especiales</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6V4a2 2 0 0 0-4 0v2"/><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M11 14h2"/></svg>
+                <span class="text-sm font-medium text-zinc-200">Motosoldadoras</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  GASES ESPECIALES · Sección destacada                        -->
+    <!-- ============================================================ -->
+    <section id="gases" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-surface via-surface2 to-bg glow-blue-strong">
+
+          <!-- Decoraciones -->
+          <div class="absolute -top-32 -right-20 w-96 h-96 rounded-full bg-brand-700/15 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute inset-0 tech-grid opacity-50 pointer-events-none"></div>
+
+          <div class="relative grid lg:grid-cols-12 gap-10 p-8 lg:p-14">
+
+            <!-- Columna izquierda: texto -->
+            <div class="lg:col-span-7 reveal">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg/50 border border-accent/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+                <span class="tag-mono text-zinc-300">Especialidad</span>
+              </div>
+              <h2 class="mt-5 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+                Gases <span class="text-gradient-blue">especiales</span>
+              </h2>
+              <div class="mt-3 wordmark-strip"></div>
+              <p class="mt-6 text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                Diseñamos, instalamos y mantenemos sistemas de gases especiales para procesos
+                que requieren máximo control, pureza y trazabilidad. Una línea de trabajo que
+                distingue a GenControl en el mercado.
+              </p>
+
+              <ul class="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-2 max-w-2xl text-zinc-200">
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Gabinetes de gases</span></li>
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Suministro para laboratorios</span></li>
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Aplicaciones de alta pureza</span></li>
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Equipos ICP</span></li>
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Robots de soldadura</span></li>
+                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span><span>Cañerías especiales</span></li>
+              </ul>
+
+              <div class="mt-10">
+                <a href="#contacto" class="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm font-semibold btn-primary">
+                  Consultar por gases especiales
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Columna derecha: visual estilizado -->
+            <div class="lg:col-span-5 reveal reveal-d2">
+              <div class="relative aspect-square max-w-[440px] mx-auto">
+                <!-- Anillo -->
+                <div class="absolute inset-0 anim-spin-slow">
+                  <svg viewBox="0 0 400 400" class="w-full h-full" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="gasRing" x1="0" x2="1">
+                        <stop offset="0%"  stop-color="#1d4ed8" stop-opacity=".6"/>
+                        <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <circle cx="200" cy="200" r="180" fill="none" stroke="url(#gasRing)" stroke-width="1.5" stroke-dasharray="2 6"/>
+                  </svg>
+                </div>
+
+                <!-- Cilindros estilizados SVG (gas) -->
+                <svg viewBox="0 0 400 400" class="absolute inset-12">
+                  <!-- Cilindro 1 -->
+                  <g transform="translate(120 80)" class="anim-float">
+                    <rect x="0" y="0" width="50" height="140" rx="8" fill="#18181B" stroke="#3b82f6" stroke-width="1.5"/>
+                    <rect x="-2" y="-12" width="54" height="14" rx="4" fill="#1d4ed8"/>
+                    <circle cx="25" cy="-18" r="3" fill="#dc2626"/>
+                    <rect x="10" y="40" width="30" height="2" fill="#3b82f6" opacity=".6"/>
+                    <rect x="10" y="55" width="20" height="2" fill="#3b82f6" opacity=".4"/>
+                    <text x="25" y="90" text-anchor="middle" fill="#A1A1AA" font-family="Inter" font-size="9" letter-spacing="2">O₂</text>
+                  </g>
+                  <!-- Cilindro 2 -->
+                  <g transform="translate(220 110)" class="anim-float" style="animation-delay:1s">
+                    <rect x="0" y="0" width="50" height="140" rx="8" fill="#18181B" stroke="#3b82f6" stroke-width="1.5"/>
+                    <rect x="-2" y="-12" width="54" height="14" rx="4" fill="#1d4ed8"/>
+                    <circle cx="25" cy="-18" r="3" fill="#dc2626"/>
+                    <text x="25" y="90" text-anchor="middle" fill="#A1A1AA" font-family="Inter" font-size="9" letter-spacing="2">Ar</text>
+                  </g>
+                  <!-- Líneas de conexión -->
+                  <path d="M 145 60 L 220 70" stroke="#3b82f6" stroke-width="1.5" fill="none" class="anim-flow neon-line"/>
+                  <path d="M 145 80 Q 175 60 220 90" stroke="#3b82f6" stroke-width="1.5" fill="none" class="anim-flow neon-line"/>
+
+                  <!-- Gabinete -->
+                  <g transform="translate(60 220)">
+                    <rect x="0" y="0" width="280" height="120" rx="6" fill="#09090B" stroke="#27272A" stroke-width="1"/>
+                    <rect x="0" y="0" width="280" height="20" rx="6" fill="#1d4ed8"/>
+                    <text x="10" y="14" fill="white" font-family="Inter" font-size="9" letter-spacing="3">GABINETE · ICP</text>
+                    <!-- contenido: indicadores -->
+                    <circle cx="40"  cy="60" r="6" fill="#3b82f6"/>
+                    <circle cx="80"  cy="60" r="6" fill="#1d4ed8"/>
+                    <circle cx="120" cy="60" r="6" fill="#dc2626"/>
+                    <rect x="160" y="50" width="100" height="20" rx="2" fill="#18181B" stroke="#27272A"/>
+                    <text x="210" y="63" text-anchor="middle" fill="#A1A1AA" font-family="JetBrains Mono, monospace" font-size="9">99.99%</text>
+                    <rect x="20" y="80" width="240" height="2" fill="#27272A"/>
+                    <rect x="20" y="80" width="180" height="2" fill="#3b82f6"/>
+                  </g>
+
+                  <!-- Nodos brillantes -->
+                  <circle cx="120" cy="80"  r="3" fill="#3b82f6" class="anim-pulse-dot"/>
+                  <circle cx="220" cy="100" r="3" fill="#3b82f6" class="anim-pulse-dot" style="animation-delay:.6s"/>
+                  <circle cx="170" cy="240" r="3" fill="#3b82f6" class="anim-pulse-dot" style="animation-delay:1.2s"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  REPRESENTACIÓN OFICIAL · MGSC                                -->
+    <!-- ============================================================ -->
+    <section id="representacion" class="py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="reveal grid lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Tarjeta MGSC -->
+          <div class="lg:col-span-7 relative overflow-hidden rounded-3xl border border-border bg-surface/70 featured-border p-8 lg:p-12">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-700/10 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 dot-grid opacity-20 pointer-events-none"></div>
+
+            <div class="relative">
+              <span class="tag-mono text-brand-400">// Representación</span>
+              <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white leading-tight">
+                Representante <span class="text-gradient-blue">Técnico y Comercial</span><br/>
+                Oficial
+              </h2>
+              <div class="mt-3 wordmark-strip"></div>
+
+              <p class="mt-6 text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                GenControl es <span class="text-white font-semibold">representante oficial de MGSC</span>,
+                una línea de referencia en equipamiento industrial. Acompañamos a los clientes
+                en la selección técnica, provisión, instalación y servicio postventa de cada
+                solución.
+              </p>
+
+              <div class="mt-8 grid sm:grid-cols-3 gap-3 max-w-2xl">
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Asesoramiento</div>
+                  <div class="mt-1 text-white font-semibold">Especializado</div>
+                </div>
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Suministro</div>
+                  <div class="mt-1 text-white font-semibold">Original</div>
+                </div>
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Servicio</div>
+                  <div class="mt-1 text-white font-semibold">Postventa</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta marca MGSC (placeholder elegante) -->
+          <div class="lg:col-span-5 relative overflow-hidden rounded-3xl border border-border bg-bg/60 p-10 flex flex-col items-center justify-center text-center">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-transparent pointer-events-none"></div>
+
+            <!--
+              PLACEHOLDER LOGO MGSC
+              Reemplazar el bloque <svg> por la imagen oficial:
+                <img src="/assets/clients/mgsc.png" alt="MGSC" class="h-20 mx-auto" />
+            -->
+            <div class="tag-mono text-muted">// Marca representada</div>
+            <div class="relative mt-6 mb-4">
+              <div class="absolute inset-0 blur-2xl bg-brand-500/30 rounded-full"></div>
+              <div class="relative w-32 h-32 rounded-2xl border border-border bg-surface/80 flex items-center justify-center">
+                <span class="font-black italic text-3xl text-white tracking-tightest">MGSC</span>
+              </div>
+            </div>
+            <p class="relative text-zinc-400 text-sm max-w-xs">
+              Logo oficial MGSC — reemplazar el placeholder por la imagen corporativa correspondiente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  PROYECTOS DE ALTA COMPLEJIDAD                                -->
+    <!-- ============================================================ -->
+    <section id="proyectos" class="py-24 lg:py-32 border-y border-border bg-gradient-to-b from-transparent via-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5 reveal">
+            <span class="tag-mono text-brand-400">// Proyectos</span>
+            <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white leading-tight">
+              Ingeniería para <br/><span class="text-gradient-blue">proyectos críticos</span>
+            </h2>
+            <div class="mt-3 wordmark-strip"></div>
+          </div>
+          <div class="lg:col-span-7 reveal reveal-d2">
+            <p class="text-lg lg:text-xl text-zinc-300 leading-relaxed">
+              Desarrollamos proyectos industriales de alta exigencia: instalaciones, equipamiento,
+              automatización y servicios para industrias que no se permiten errores.
+            </p>
+            <p class="mt-5 text-zinc-400 leading-relaxed">
+              Trabajamos con clientes que requieren socios técnicos confiables y con capacidad
+              real de respuesta. Por la naturaleza de nuestros proyectos, muchos desarrollos
+              permanecen bajo acuerdos de <span class="text-white font-semibold">confidencialidad</span>,
+              condición que respetamos de manera estricta.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bloques de capacidades -->
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8h14v13M9 21v-5h6v5M9 8h6"/></svg>
+            <h3 class="mt-4 font-bold text-white">Llave en mano</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Diseño, provisión y ejecución integral del proyecto.</p>
+          </div>
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <h3 class="mt-4 font-bold text-white">Norma y calidad</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Cumplimiento IRAM, IEC y procedimientos certificados.</p>
+          </div>
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+            <h3 class="mt-4 font-bold text-white">Cobertura nacional</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Capacidad operativa en distintas regiones del país.</p>
+          </div>
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h3 class="mt-4 font-bold text-white">Confidencialidad</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">Compromiso con la reserva técnica y comercial.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  EMPRESAS QUE CONFIARON · Logos                                 -->
+    <!-- ============================================================ -->
+    <section id="clientes" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Confianza</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Empresas e instituciones<br/>
+            <span class="text-gradient-blue">que confiaron en nosotros</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            GenControl ha trabajado con empresas e instituciones de referencia nacional.
+            Por la naturaleza de los proyectos, muchos desarrollos permanecen bajo
+            <span class="text-white font-medium">acuerdos de confidencialidad</span>.
+          </p>
+        </div>
+
+        <!-- Grilla de logos (placeholders editables) -->
+        <div class="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+          <!--
+            CADA LOGO ES UN PLACEHOLDER.
+            Para incorporar un logo nuevo:
+              1) Reemplazar el <svg> por:   <img src="/assets/clients/nombre.png" alt="..." class="client-logo h-12 mx-auto" />
+              2) Mantener la clase .client-logo para conservar el efecto grayscale → color.
+          -->
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-black text-2xl text-white tracking-tightest">CONAE</div>
+              <div class="tag-mono text-muted mt-1">Espacio</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">FAdeA</div>
+              <div class="tag-mono text-muted mt-1">Aeronáutica</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift">
+            <div class="text-center">
+              <div class="font-bold text-sm text-zinc-500">LOGO</div>
+              <div class="tag-mono text-zinc-600 mt-1">Reemplazable</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-10 text-sm text-zinc-500 max-w-3xl">
+          Por políticas internas y acuerdos firmados, no divulgamos detalles sobre los proyectos
+          realizados para muchos de nuestros clientes. Agradecemos la confianza depositada en
+          GenControl.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  SECTORES                                                       -->
+    <!-- ============================================================ -->
+    <section id="sectores" class="py-24 lg:py-32 border-y border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Sectores</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Industrias en las que <span class="text-gradient-blue">operamos</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Trabajamos en sectores donde la ingeniería marca la diferencia.
+            Estas son áreas en las que podemos desarrollar proyectos — sin afirmación de exclusividad.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Sector card -->
+          <div class="reveal reveal-d1 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Industria</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Plantas productivas y de manufactura.</p>
+          </div>
+
+          <div class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6h4l-7 8-7-8h4z"/><path d="M7 21h10"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Laboratorios</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Infraestructura para análisis e investigación.</p>
+          </div>
+
+          <div class="reveal reveal-d3 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14l-2 9H7z"/><circle cx="7.5" cy="13.5" r="1.5"/><circle cx="16.5" cy="13.5" r="1.5"/><path d="M3 11h18"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Automotriz</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Líneas de producción y ensamblaje.</p>
+          </div>
+
+          <div class="reveal reveal-d4 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Energía</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Generación, respaldo y distribución.</p>
+          </div>
+
+          <div class="reveal reveal-d1 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-accent/15 blur-2xl group-hover:bg-accent/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="2"/><path d="M4 6v6c0 1.1 3.6 2 8 2s8-.9 8-2V6"/><path d="M4 12v6c0 1.1 3.6 2 8 2s8-.9 8-2v-6"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Oil &amp; Gas</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Procesos, instalaciones y servicios especiales.</p>
+          </div>
+
+          <div class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v11H3z"/><path d="M9 14h6"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Grandes Comercios</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Retail de gran escala y logística.</p>
+          </div>
+
+          <div class="reveal reveal-d3 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><circle cx="9" cy="15" r="1"/><circle cx="15" cy="15" r="1"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Aeroespacial</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Proveeduría técnica especializada.</p>
+          </div>
+
+          <div class="reveal reveal-d4 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Otros</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Nuevos sectores bajo requerimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  COBERTURA                                                     -->
+    <!-- ============================================================ -->
+    <section id="cobertura" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <!-- Texto -->
+          <div class="lg:col-span-6 reveal">
+            <span class="tag-mono text-brand-400">// Cobertura</span>
+            <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+              Base operativa en<br/>
+              <span class="text-gradient-blue">Córdoba</span>, proyección<br/>
+              <span class="text-white">nacional</span>.
+            </h2>
+            <div class="mt-3 wordmark-strip"></div>
+            <p class="mt-6 text-lg text-zinc-300 leading-relaxed max-w-xl">
+              Operamos desde Córdoba Capital con capacidad logística para desarrollar
+              proyectos en distintos puntos del país, manteniendo el mismo estándar
+              técnico y de servicio en cada destino.
+            </p>
+
+            <div class="mt-8 grid sm:grid-cols-2 gap-4 max-w-xl">
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">Base</div>
+                <div class="mt-2 font-semibold text-white">Córdoba · Argentina</div>
+                <p class="mt-1 text-sm text-zinc-400">Oficinas técnicas y operativas.</p>
+              </div>
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">Alcance</div>
+                <div class="mt-2 font-semibold text-white">Nacional</div>
+                <p class="mt-1 text-sm text-zinc-400">Coordinación logística en todo el país.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual: pin estilizado + país esquemático -->
+          <div class="lg:col-span-6 reveal reveal-d2">
+            <div class="relative aspect-[5/4] max-w-xl mx-auto rounded-3xl border border-border bg-surface/60 overflow-hidden featured-border">
+              <div class="absolute inset-0 tech-grid opacity-50 pointer-events-none"></div>
+              <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-brand-700/20 blur-3xl pointer-events-none"></div>
+
+              <!-- Mapa Argentina estilizado (silueta simplificada + pin) -->
+              <svg viewBox="0 0 400 320" class="absolute inset-0 w-full h-full p-8" aria-hidden="true">
+                <!-- Líneas radiales desde Córdoba -->
+                <g stroke="#3b82f6" stroke-width="1" fill="none" opacity=".4">
+                  <line x1="200" y1="140" x2="60"  y2="60"/>
+                  <line x1="200" y1="140" x2="340" y2="60"/>
+                  <line x1="200" y1="140" x2="80"  y2="240"/>
+                  <line x1="200" y1="140" x2="340" y2="240"/>
+                  <line x1="200" y1="140" x2="200" y2="30"/>
+                  <line x1="200" y1="140" x2="200" y2="260"/>
+                </g>
+
+                <!-- Círculos concéntricos (broadcast) -->
+                <g fill="none" stroke="#1d4ed8" opacity=".25">
+                  <circle cx="200" cy="140" r="60"  stroke-dasharray="2 4"/>
+                  <circle cx="200" cy="140" r="100" stroke-dasharray="2 6"/>
+                  <circle cx="200" cy="140" r="140" stroke-dasharray="2 8"/>
+                </g>
+
+                <!-- Pin central (Córdoba) -->
+                <g transform="translate(200 140)">
+                  <circle r="28" fill="#dc2626" opacity=".15"/>
+                  <circle r="14" fill="#dc2626" opacity=".25">
+                    <animate attributeName="r" values="14;22;14" dur="2.6s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values=".25;0;.25" dur="2.6s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="7"  fill="#dc2626"/>
+                  <text x="0" y="-22" text-anchor="middle" fill="#dc2626" font-family="Inter" font-size="11" font-weight="700" letter-spacing="3">CÓRDOBA</text>
+                </g>
+
+                <!-- Nodos en otras zonas -->
+                <g fill="#3b82f6">
+                  <circle cx="60"  cy="60"  r="3"/>
+                  <circle cx="340" cy="60"  r="3"/>
+                  <circle cx="80"  cy="240" r="3"/>
+                  <circle cx="340" cy="240" r="3"/>
+                  <circle cx="200" cy="30"  r="3"/>
+                  <circle cx="200" cy="260" r="3"/>
+                </g>
+
+                <!-- Etiquetas pequeñas -->
+                <g fill="#A1A1AA" font-family="Inter" font-size="9" font-weight="500" letter-spacing="2">
+                  <text x="60"  y="50"  text-anchor="middle">NOA</text>
+                  <text x="340" y="50"  text-anchor="middle">NEA</text>
+                  <text x="80"  y="260" text-anchor="middle">CUYO</text>
+                  <text x="340" y="260" text-anchor="middle">PATAGONIA</text>
+                  <text x="200" y="20"  text-anchor="middle">CENTRO</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  CONTACTO · Tarjetas (sin formulario)                          -->
+    <!-- ============================================================ -->
+    <section id="contacto" class="py-24 lg:py-32 border-t border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Contacto</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            ¿Tiene un <span class="text-gradient-blue">proyecto</span> en curso?
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Escríbanos por el canal que prefiera. Respondemos con una propuesta clara.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Teléfono -->
+          <a href="#" data-link="phone" class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-6 card-lift block">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z"/></svg>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Teléfono</div>
+            <div class="mt-2 font-semibold text-white" data-info="phone">+54 XXX XXX-XXXX</div>
+          </a>
+
+          <!-- Email -->
+          <a href="#" data-link="email" class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-6 card-lift block">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Email</div>
+            <div class="mt-2 font-semibold text-white break-all" data-info="email">info@gencontrol.com.ar</div>
+          </a>
+
+          <!-- Dirección -->
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Dirección</div>
+            <div class="mt-2 font-semibold text-white" data-info="address">Córdoba, Argentina</div>
+          </div>
+
+          <!-- Horarios -->
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Horarios</div>
+            <div class="mt-2 font-semibold text-white" data-info="hours">Lun a Vie — 08:00 a 18:00</div>
+          </div>
+        </div>
+
+        <!-- CTA whatsapp grande -->
+        <div class="mt-14 reveal reveal-d2">
+          <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-r from-brand-700/30 via-brand-600/15 to-surface/40 p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+              <h3 class="font-black text-2xl lg:text-3xl text-white tracking-tightest">¿Tiene un proyecto entre manos?</h3>
+              <p class="mt-2 text-zinc-300 max-w-xl">Conversemos. Le enviamos una propuesta técnica a la medida.</p>
+            </div>
+            <a href="#" data-link="whatsapp" class="inline-flex items-center gap-2.5 px-6 py-4 rounded-md text-sm font-semibold btn-primary shrink-0">
+              Hablar por WhatsApp
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!--  FOOTER · 3 columnas + línea separadora + créditos          -->
+  <!-- ============================================================ -->
+  <footer class="border-t border-border bg-surface/30">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-12">
+
+        <!-- Columna 1: Identidad -->
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 64 64" class="" fill="none" aria-hidden="true">
+              <circle cx="32" cy="32" r="28" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="2 4"/>
+              <path d="M32 14 a18 18 0 1 1 -12.7 5.3" stroke="#1d4ed8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M32 22 a10 10 0 1 0 7.07 2.93" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <circle cx="32" cy="32" r="3" fill="#3b82f6"/>
+            </svg>
+            <div class="flex flex-col leading-none">
+              <span class="font-black tracking-tightest text-white text-lg uppercase italic">GenControl</span>
+              <span class="tag-mono text-muted mt-1">Servicios Industriales · S.A.</span>
+            </div>
+          </div>
+
+          <p class="mt-6 text-zinc-400 leading-relaxed max-w-md">
+            GenControl S.A. desarrolla ingeniería, equipamiento y servicios industriales para
+            empresas que requieren resultados confiables.
+          </p>
+
+          <div class="mt-6 flex flex-col gap-2 text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+              <span data-info="address">Córdoba, Argentina</span>
+            </div>
+          </div>
+
+          <!-- Redes -->
+          <div class="mt-6 flex items-center gap-3">
+            <a href="#" data-link="linkedin" aria-label="LinkedIn" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-zinc-300"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8c0 .3.3.6.6.6h16.8c.3 0 .6-.3.6-.6V3.6c0-.3-.3-.6-.6-.6zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11.3 9.8h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1-1.6 2.1v4.1h-2.6V9.7h2.5v1.2h.1a2.8 2.8 0 0 1 2.5-1.4c2.7 0 3.2 1.8 3.2 4.1v4.7z"/></svg>
+            </a>
+            <a href="#" data-link="instagram" aria-label="Instagram" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-zinc-300" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div class="lg:col-span-3">
+          <div class="tag-mono text-brand-400">Navegación</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="#quienes-somos" class="text-sm text-zinc-400 hover:text-white transition-colors">Empresa</a></li>
+            <li><a href="#servicios"     class="text-sm text-zinc-400 hover:text-white transition-colors">Servicios</a></li>
+            <li><a href="#gases"         class="text-sm text-zinc-400 hover:text-white transition-colors">Gases especiales</a></li>
+            <li><a href="#proyectos"     class="text-sm text-zinc-400 hover:text-white transition-colors">Proyectos</a></li>
+            <li><a href="#clientes"      class="text-sm text-zinc-400 hover:text-white transition-colors">Clientes</a></li>
+            <li><a href="#sectores"      class="text-sm text-zinc-400 hover:text-white transition-colors">Sectores</a></li>
+            <li><a href="#contacto"      class="text-sm text-zinc-400 hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicios destacados + cobertura -->
+        <div class="lg:col-span-4">
+          <div class="tag-mono text-brand-400">Servicios destacados</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Ingeniería · Instalaciones</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Automatización &amp; tableros</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Grupos electrógenos</a></li>
+            <li><a href="#gases"     class="text-sm text-zinc-400 hover:text-white transition-colors">Gases especiales</a></li>
+            <li><a href="#representacion" class="text-sm text-zinc-400 hover:text-white transition-colors">Representación MGSC</a></li>
+          </ul>
+
+          <div class="mt-8 tag-mono text-brand-400">Cobertura</div>
+          <ul class="mt-3 space-y-2 text-sm text-zinc-400">
+            <li>Base operativa · Córdoba</li>
+            <li>Proyectos · alcance nacional</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Línea separadora + créditos -->
+      <div class="mt-14 pt-8 border-t border-border flex flex-col-reverse md:flex-row items-center justify-between gap-5 text-sm">
+        <div class="text-zinc-500" data-info="copyright">
+          © <span data-info="year">2025</span> GenControl S.A. · Todos los derechos reservados.
+        </div>
+        <div class="text-zinc-400 flex items-center gap-2 flex-wrap justify-center">
+          <span>Hecho por</span>
+          <a href="#" data-link="benjamin" class="font-semibold text-white hover:text-brand-400 transition-colors">Benjamín Rincón</a>
+          <span class="text-zinc-600">&</span>
+          <a href="#" data-link="santiago" class="font-semibold text-white hover:text-brand-400 transition-colors">Santiago Rodríguez</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================ -->
+  <!--  FLOATING BUTTONS · WhatsApp + Email                          -->
+  <!-- ============================================================ -->
+  <div class="fixed right-5 bottom-5 z-40 flex flex-col items-end gap-3">
+
+    <!-- WhatsApp -->
+    <a href="#" data-link="whatsapp" aria-label="WhatsApp"
+       class="fab group flex items-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 pl-3 pr-4 py-3 hover:bg-emerald-400">
+      <span class="relative flex w-6 h-6 items-center justify-center">
+        <span class="absolute inset-0 rounded-full bg-emerald-400/60 animate-ping"></span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="relative"><path d="M.5 23.5l1.6-6A11.4 11.4 0 0 1 1.3 7.9 11.5 11.5 0 0 1 12.8 1.2a11.4 11.4 0 0 1 8.2 3.4 11.4 11.4 0 0 1 3.3 8.2 11.5 11.5 0 0 1-11.6 11.5 11 11 0 0 1-5.5-1.5L.5 23.5zm6.6-4.2l.4.2a8.7 8.7 0 0 0 4.4 1.2 9 9 0 0 0 9.1-9.1 9 9 0 0 0-2.6-6.4 9 9 0 0 0-6.4-2.7 9 9 0 0 0-9.1 9.1 8.7 8.7 0 0 0 1.3 4.4l.2.4-1 3.9 4-1zm5.3-3.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.1 4.6.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+      </span>
+      <span class="label text-sm font-semibold">WhatsApp</span>
+    </a>
+
+    <!-- Email -->
+    <a href="#" data-link="email" aria-label="Email"
+       class="fab group flex items-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 pl-3 pr-4 py-3 hover:bg-brand-500">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span class="label text-sm font-semibold">Email</span>
+    </a>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!--  JAVASCRIPT · CONFIG único + toda la lógica                   -->
+  <!-- ============================================================ -->
+  <script>
+    'use strict';
+
+    /* =====================================================================
+       CONFIG · ÚNICO OBJETO DE EDICIÓN
+       Toda la información del sitio se toma desde aquí.
+       Modificá los valores entre comillas y listo.
+       ===================================================================== */
+    const CONFIG = {
+      // ==== Datos de contacto (EDITAR) ==== //
+      company: {
+        name:     'GenControl S.A.',
+        phone:    '+54 351 555-1234',                  // EDITAR — teléfono visible
+        phoneRaw: '+543515551234',                     // EDITAR — sólo números (para wa.me / tel:)
+        whatsapp: '+543515551234',                     // EDITAR — sólo números, formato internacional
+        email:    'info@gencontrol.com.ar',            // EDITAR
+        address:  'Córdoba Capital, Argentina',         // EDITAR
+        hours:    'Lun a Vie · 08:00 a 18:00',         // EDITAR
+      },
+
+      // ==== Redes sociales ==== //
+      social: {
+        linkedin:  '#',   // EDITAR
+        instagram: '#',   // EDITAR
+      },
+
+      // ==== Autores del sitio (clicankeables en footer) ==== //
+      authors: {
+        benjamin: {
+          name: 'Benjamín Rincón',
+          url:  'https://instagram.com/',              // EDITAR
+        },
+        santiago: {
+          name: 'Santiago Rodríguez',
+          url:  'https://instagram.com/',              // EDITAR
+        },
+      },
+
+      // ==== Datos clave ==== //
+      startedYear: 1998,         // Año de origen (trayectoria)
+      foundedYear: 2015,         // Constitución GenControl S.A.
+      foundedTag:  'Hito institucional',
+
+      // ==== MGSC ==== //
+      mgsc: {
+        role: 'Representante Técnico y Comercial Oficial',
+      },
+    };
+
+
+    /* =====================================================================
+       HELPERS · Pequeñas utilidades DOM
+       ===================================================================== */
+    const $  = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+
+    /* =====================================================================
+       1) REVEAL ANIMATIONS · IntersectionObserver
+       ===================================================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    $$('.reveal').forEach((el) => revealObserver.observe(el));
+
+
+    /* =====================================================================
+       2) HEADER · Comportamiento al hacer scroll
+       ===================================================================== */
+    const headerInner = $('#header-inner');
+    // Clase base del header (en el HTML):  bg-bg/70 border-b border-transparent
+    // Al scrollear cambiamos a una versión más opaca y con borde visible.
+    const setHeaderState = () => {
+      const y = window.scrollY;
+      if (y > 30) {
+        headerInner.classList.add('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
+        headerInner.classList.remove('bg-bg/70', 'border-transparent');
+      } else {
+        headerInner.classList.remove('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
+        headerInner.classList.add('bg-bg/70', 'border-transparent');
+      }
+    };
+    setHeaderState();
+    window.addEventListener('scroll', setHeaderState, { passive: true });
+
+
+    /* =====================================================================
+       3) MENÚ MÓVIL
+       ===================================================================== */
+    const menuBtn   = $('#menu-toggle');
+    const mobileNav = $('#mobile-menu');
+    const menuIcon  = $('#menu-icon');
+
+    menuBtn.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Cerrar menú al tocar un link
+    $$('#mobile-menu a').forEach((a) => a.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+
+    /* =====================================================================
+       4) INYECCIÓN DE DATOS · CONFIG → DOM
+       ===================================================================== */
+    // [data-info="phone"]   → CONFIG.company.phone
+    // [data-info="email"]   → CONFIG.company.email
+    // [data-info="address"] → CONFIG.company.address
+    // [data-info="hours"]   → CONFIG.company.hours
+    $$('[data-info]').forEach((el) => {
+      const key = el.dataset.info;
+      const map = {
+        phone:   CONFIG.company.phone,
+        email:   CONFIG.company.email,
+        address: CONFIG.company.address,
+        hours:   CONFIG.company.hours,
+        year:    new Date().getFullYear(),
+      };
+      if (map[key]) el.textContent = map[key];
+    });
+
+    // Copyright automático
+    const copyrightEl = document.querySelector('[data-info="copyright"]');
+    if (copyrightEl) {
+      copyrightEl.innerHTML = `© ${new Date().getFullYear()} ${CONFIG.company.name} · Todos los derechos reservados.`;
+    }
+
+    // [data-link] · Enlaces dinámicos
+    //   phone     → tel:+549...
+    //   email     → mailto:...
+    //   whatsapp  → https://wa.me/...
+    //   linkedin  → CONFIG.social.linkedin
+    //   instagram → CONFIG.social.instagram
+    //   benjamin  → CONFIG.authors.benjamin.url
+    //   santiago  → CONFIG.authors.santiago.url
+    $$('[data-link]').forEach((el) => {
+      const type = el.dataset.link;
+      let href = '#';
+      switch (type) {
+        case 'phone':
+          href = `tel:${CONFIG.company.phoneRaw}`;
+          break;
+        case 'email':
+          href = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent('Consulta desde el sitio web')}`;
+          break;
+        case 'whatsapp':
+          href = `https://wa.me/${CONFIG.company.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer una consulta técnica.')}`;
+          break;
+        case 'linkedin':
+          href = CONFIG.social.linkedin;
+          break;
+        case 'instagram':
+          href = CONFIG.social.instagram;
+          break;
+        case 'benjamin':
+          href = CONFIG.authors.benjamin.url;
+          el.textContent = CONFIG.authors.benjamin.name;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          break;
+        case 'santiago':
+          href = CONFIG.authors.santiago.url;
+          el.textContent = CONFIG.authors.santiago.name;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          break;
+      }
+      el.setAttribute('href', href);
+      // Para enlaces externos (autores): abrir en pestaña nueva
+      if (['benjamin', 'santiago', 'linkedin', 'instagram'].includes(type) && href !== '#') {
+        el.target = '_blank';
+        el.rel = 'noopener noreferrer';
+      }
+    });
+
+
+    /* =====================================================================
+       5) ACCESIBILIDAD · Cerrar menú con Escape
+       ===================================================================== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
+        mobileNav.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+  </script>
+
+</body>
+</html>
