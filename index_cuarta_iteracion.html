@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GenControl S.A. — Servicios Industriales. Ingeniería, equipamiento y proyectos de alta complejidad para empresas que requieren resultados confiables." />
+  <meta name="theme-color" content="#09090B" />
+  <title>GenControl S.A. — Servicios Industriales · Ingeniería & Equipamiento</title>
+
+  <!-- ============================================================ -->
+  <!-- FAVICON · Reemplazar favicon.png por el archivo final       -->
+  <!-- ============================================================ -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- ============================================================ -->
+  <!-- INTER · Google Fonts (pesos 400, 500, 600, 700, 800, 900)     -->
+  <!-- ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================ -->
+  <!-- LUCIDE ICONS · Iconografía vectorial editable y consistente  -->
+  <!-- (Reemplazá cualquier ícono cambiando el atributo data-lucide -->
+  <!--  por el nombre del ícono de https://lucide.dev/icons)        -->
+  <!-- ============================================================ -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- ============================================================ -->
+  <!-- TAILWINDCSS · CDN con configuración personalizada            -->
+  <!-- ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            // ==== Tokens derivados del logo (función rgb con <alpha-value>) ==== //
+            // Estos permiten usar modificadores de opacidad:  bg-bg/70, bg-surface/30, etc.
+            bg:       'rgb(9 9 11 / <alpha-value>)',      // fondo principal (zinc-950)
+            surface:  'rgb(24 24 27 / <alpha-value>)',     // tarjetas (zinc-900)
+            surface2: 'rgb(31 31 35 / <alpha-value>)',     // tarjetas elevadas / hover
+            border:   'rgb(39 39 42 / <alpha-value>)',     // bordes sutiles (zinc-800)
+            muted:    'rgb(161 161 170 / <alpha-value>)',  // textos secundarios (zinc-400)
+            subtle:   'rgb(113 113 122 / <alpha-value>)',  // textos terciarios (zinc-500)
+            // ==== Acentos (paleta azul del logo, rojo para detalles) ==== //
+            brand: {
+              DEFAULT: 'rgb(29 78 216 / <alpha-value>)',   // azul principal #1d4ed8
+              50:  'rgb(239 246 255 / <alpha-value>)',
+              100: 'rgb(219 234 254 / <alpha-value>)',
+              200: 'rgb(191 219 254 / <alpha-value>)',
+              300: 'rgb(147 197 253 / <alpha-value>)',
+              400: 'rgb(96 165 250 / <alpha-value>)',
+              500: 'rgb(59 130 246 / <alpha-value>)',
+              600: 'rgb(37 99 235 / <alpha-value>)',
+              700: 'rgb(29 78 216 / <alpha-value>)',
+              800: 'rgb(30 64 175 / <alpha-value>)',
+              900: 'rgb(30 58 138 / <alpha-value>)',
+            },
+            accent: 'rgb(220 38 38 / <alpha-value>)',     // rojo del logo — sólo acentos pequeños
+          },
+          letterSpacing: {
+            'tightest': '-0.04em',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- ESTILOS PERSONALIZADOS · Base, animaciones, utilitarios     -->
+  <!-- ============================================================ -->
+  <style>
+    /* ===== Reset suave + tipografía base ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      background: #09090B;
+      color: #E4E4E7;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-feature-settings: 'ss01', 'cv11';
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: #1d4ed8; color: white; }
+
+    /* ===== Custom scrollbar (discreta) ===== */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #09090B; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* ===== Reveal inicial: las secciones aparecen animadas ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Delays para escalonar hijos */
+    .reveal-d1 { transition-delay: .08s; }
+    .reveal-d2 { transition-delay: .16s; }
+    .reveal-d3 { transition-delay: .24s; }
+    .reveal-d4 { transition-delay: .32s; }
+    .reveal-d5 { transition-delay: .40s; }
+
+    /* ===== Halo brillante azul (sombras suaves premium) ===== */
+    .glow-blue {
+      box-shadow:
+        0 0 0 1px rgba(59,130,246,.18),
+        0 12px 40px -12px rgba(29,78,216,.45),
+        inset 0 1px 0 0 rgba(255,255,255,.04);
+    }
+
+    /* ===== Card lift (hover elegante) ===== */
+    .card-lift {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease, background-color .35s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,.4);
+      background-color: #1F1F23;
+    }
+
+    /* ===== Fondo técnico con grilla sutil para el hero ===== */
+    .tech-grid {
+      background-image:
+        linear-gradient(rgba(59,130,246,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* ===== Etiqueta monoespaciada tipo "instrumento" ===== */
+    .tag-mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ===== Botones premium ===== */
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      box-shadow: 0 8px 24px -8px rgba(29,78,216,.7), inset 0 1px 0 0 rgba(255,255,255,.18);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 32px -8px rgba(29,78,216,.85), inset 0 1px 0 0 rgba(255,255,255,.22);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.02);
+      color: #E4E4E7;
+      border: 1px solid #27272A;
+      transition: all .25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,.06);
+      color: white;
+    }
+
+    /* ===== Línea de tiempo (timeline) ===== */
+    .timeline-line {
+      background: linear-gradient(180deg, rgba(59,130,246,.0) 0%, rgba(59,130,246,.6) 12%, rgba(59,130,246,.6) 88%, rgba(59,130,246,.0) 100%);
+    }
+    .timeline-dot {
+      background: #09090B;
+      border: 2px solid #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+    }
+    .timeline-dot.is-key {
+      background: #1d4ed8;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 6px rgba(59,130,246,.25), 0 0 24px rgba(59,130,246,.6);
+    }
+
+    /* ===== Logos de clientes: grayscale → color ===== */
+    .client-logo {
+      filter: grayscale(1) brightness(.85) contrast(.9);
+      opacity: .55;
+      transition: filter .5s ease, opacity .5s ease, transform .35s ease;
+    }
+    .client-logo:hover {
+      filter: grayscale(0) brightness(1) contrast(1);
+      opacity: 1;
+    }
+
+    /* ===== Floating buttons ===== */
+    .fab {
+      transition: width .35s cubic-bezier(.16,1,.3,1), padding .35s ease, transform .25s ease;
+    }
+    .fab .label { opacity: 0; max-width: 0; transition: max-width .35s ease, opacity .25s ease; overflow: hidden; white-space: nowrap; }
+    .fab:hover .label { opacity: 1; max-width: 200px; margin-left: .6rem; }
+    .fab:hover { transform: translateY(-2px); }
+
+    /* ===== Línea animada que recorre el header sticky ===== */
+    .header-line {
+      background: linear-gradient(90deg, transparent, #1d4ed8, #dc2626, transparent);
+      height: 1px;
+    }
+
+    /* ===== Backdrop blur para el header sticky ===== */
+    .header-blur {
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+    }
+
+    /* ===== Borde decorativo en bloques destacados ===== */
+    .featured-border {
+      position: relative;
+    }
+    .featured-border::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(29,78,216,.7), rgba(220,38,38,.4), rgba(29,78,216,.0));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ===== Pequeño separador con doble trazo (eco wordmark) ===== */
+    .wordmark-strip {
+      position: relative;
+      height: 12px;
+      width: 64px;
+    }
+    .wordmark-strip::before, .wordmark-strip::after {
+      content: ''; position: absolute; left: 0; right: 0;
+      height: 2px; border-radius: 2px;
+    }
+    .wordmark-strip::before { top: 0;    background: linear-gradient(90deg, #1d4ed8, transparent); }
+    .wordmark-strip::after  { top: 8px;   background: linear-gradient(90deg, #dc2626, transparent); height: 1.5px; }
+
+    /* ===== Soft text gradient para palabras destacadas ===== */
+    .text-gradient-blue {
+      background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ============================================================ */
+    /*  PLACEHOLDERS DE IMAGEN · Contenedor profesional preparado  */
+    /*  para recibir una fotografía real.                           */
+    /*  - Borde punteado elegante                                   */
+    /*  - Fondo oscuro con gradiente sutil                          */
+    /*  - Mismo radius que el resto del sitio (rounded-3xl)         */
+    /*  - Mismo glow azul que el resto del sitio (.glow-blue)        */
+    /* ============================================================ */
+    .img-placeholder {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      text-align: center;
+      padding: 1.5rem;
+      background:
+        linear-gradient(135deg, rgba(24,24,27,.7) 0%, rgba(9,9,11,.6) 100%);
+      border: 1.5px dashed rgba(59,130,246,.45);
+      color: #a1a1aa;
+      overflow: hidden;
+    }
+    /* Grilla de técnicos decorativa en el fondo del placeholder */
+    .img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      pointer-events: none;
+    }
+    .img-placeholder > * { position: relative; z-index: 1; }
+    .img-placeholder .ph-icon {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.25);
+      color: #60a5fa;
+    }
+    .img-placeholder .ph-icon svg { width: 22px; height: 22px; }
+    .img-placeholder .ph-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #93c5fd;
+    }
+    .img-placeholder .ph-note {
+      font-size: .72rem;
+      color: #71717a;
+      max-width: 80%;
+      line-height: 1.4;
+    }
+    /* Etiqueta de identificación en la esquina superior */
+    .img-placeholder .ph-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #a1a1aa;
+      padding: 4px 8px;
+      border: 1px solid rgba(63,63,70,.7);
+      border-radius: 4px;
+      background: rgba(9,9,11,.5);
+    }
+    .img-placeholder .ph-tag-accent {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      padding: 4px 8px;
+      border: 1px solid rgba(59,130,246,.35);
+      border-radius: 4px;
+      background: rgba(9,9,11,.5);
+    }
+
+    /* ============================================================ */
+    /*  MICRODETALLES INDUSTRIALES                                  */
+    /*  Etiquetas técnicas discretas tipo instrumental              */
+    /* ============================================================ */
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      padding: 3px 8px;
+      border: 1px solid rgba(59,130,246,.22);
+      border-radius: 3px;
+      background: rgba(29,78,216,.06);
+    }
+    .tech-tag-muted {
+      color: #71717a;
+      border-color: rgba(63,63,70,.6);
+      background: rgba(24,24,27,.4);
+    }
+
+    /* Línea técnica fina con código identificador */
+    .tech-line {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #71717a;
+    }
+    .tech-line::before,
+    .tech-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,.3), transparent);
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<!-- ================================================================ -->
+<!--  CUERPO DE LA PÁGINA                                              -->
+<!-- ================================================================ -->
+<body class="bg-bg text-zinc-200 antialiased">
+
+  <!-- ============================================================ -->
+  <!--  HEADER · Sticky, responsive, logo, menú, contacto, hamburger -->
+  <!-- ============================================================ -->
+  <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <!-- Línea superior con gradiente triple (azul → rojo → transparente) -->
+    <div class="header-line opacity-60"></div>
+
+    <div id="header-inner" class="header-blur bg-bg/70 border-b border-transparent transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
+
+        <!--
+          ===== LOGOTIPO =====
+          Si se renombra el archivo, cambiar únicamente logo.png por el nuevo nombre
+          en los tres lugares donde aparece: header, footer y favicon (futuro).
+        -->
+        <a href="#hero" class="flex items-center gap-3 group" aria-label="GenControl — Inicio">
+          <!-- Reemplazar logo.png si cambia el nombre del archivo. -->
+          <img src="logo.png" alt="GenControl" class="h-10 lg:h-11 w-auto" />
+          <!-- Wordmark -->
+          <div class="flex flex-col leading-none">
+            <span class="font-black tracking-tightest text-white text-lg lg:text-xl uppercase italic">GenControl</span>
+            <span class="tag-mono text-muted mt-1">Servicios Industriales</span>
+          </div>
+        </a>
+
+        <!-- ===== Navegación desktop ===== -->
+        <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+          <!--
+            NOTA: href="#" apunta a la sección por id.
+            Para agregar/quitar items, duplicar o borrar el bloque <a>.
+          -->
+          <a href="#quienes-somos"   class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Empresa</a>
+          <a href="#servicios"       class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Servicios</a>
+          <a href="#gases"           class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Especialidades</a>
+          <a href="#proyectos"       class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Proyectos</a>
+          <a href="#clientes"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Empresas</a>
+          <a href="#sectores"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Sectores</a>
+          <a href="#contacto"        class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
+            Contacto
+            <!-- Icono: Flecha derecha (acción / ir a) -->
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </nav>
+
+        <!-- ===== Botón hamburguesa (mobile) =====
+             Icono: Menú hamburguesa (apertura de navegación móvil) -->
+        <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+                class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border bg-surface/60 hover:bg-surface transition-colors">
+          <i id="menu-icon" data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- ===== Menú móvil desplegable ===== -->
+      <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-bg/95 backdrop-blur">
+        <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1" aria-label="Navegación móvil">
+          <a href="#quienes-somos"   class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Empresa</a>
+          <a href="#servicios"       class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Servicios</a>
+          <a href="#gases"           class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Especialidades</a>
+          <a href="#proyectos"       class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Proyectos</a>
+          <a href="#clientes"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Empresas</a>
+          <a href="#sectores"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Sectores</a>
+          <a href="#contacto"        class="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold btn-primary">Ir a contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer invisible para que el contenido no quede debajo del header sticky -->
+  <div class="h-16 lg:h-20" aria-hidden="true"></div>
+
+
+  <main>
+
+    <!-- ============================================================ -->
+    <!--  HERO · Identidad industrial y autoridad técnica             -->
+    <!-- ============================================================ -->
+    <section id="hero" class="relative overflow-hidden">
+      <!-- Fondo: grilla técnica sutil + viñeta inferior -->
+      <div class="absolute inset-0 tech-grid opacity-60 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg pointer-events-none"></div>
+
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-14 lg:pt-24 pb-20 lg:pb-32">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+          <!-- ===== Columna texto ===== -->
+          <div class="lg:col-span-7 reveal">
+            <!-- Etiqueta superior · Estado operativo + disciplina técnica -->
+            <div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full bg-surface/70 border border-border backdrop-blur">
+              <span class="relative flex w-2 h-2">
+                <span class="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70"></span>
+                <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-400"></span>
+              </span>
+              <span class="tag-mono text-zinc-300">Ingeniería · Equipamiento · Automatización</span>
+            </div>
+
+            <!-- Título principal — palabra destacada con gradiente azul -->
+            <h1 class="mt-6 font-black tracking-tightest text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] text-white">
+              Soluciones <span class="text-gradient-blue">Industriales</span><br />
+              para Proyectos de<br />
+              <span class="text-gradient-blue">Alta Complejidad.</span>
+            </h1>
+
+            <!-- ============================================================ -->
+            <!--  DETALLE VISUAL · Etiqueta técnica discreta                 -->
+            <!--  Aporta jerarquía visual y refuerza identidad industrial.    -->
+            <!-- ============================================================ -->
+            <div class="mt-7 flex items-center gap-2">
+              <span class="tech-tag">GEN-01</span>
+              <span class="tech-tag tech-tag-muted">Panel · Control · Industrial</span>
+            </div>
+
+            <!-- Subtítulo · Tono técnico, no comercial -->
+            <p class="mt-6 max-w-2xl text-lg lg:text-xl text-zinc-400 leading-relaxed">
+              Desarrollamos ingeniería, equipamiento y servicios industriales para empresas que
+              requieren resultados confiables. Más de <span class="text-white font-semibold">30 años</span>
+              de experiencia.
+            </p>
+
+            <!-- CTAs -->
+            <div class="mt-9 flex flex-wrap items-center gap-4">
+              <!--
+                ===============================================================
+                BOTÓN PRINCIPAL · Acción corporativa
+                Tono ingeniería — "Hablar con un asesor".
+                ===============================================================
+              -->
+              <a href="#contacto" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-md text-sm font-semibold btn-primary">
+                Hablar con un asesor
+                <!-- Icono: Teléfono / consultoría -->
+                <i data-lucide="phone-call" class="w-4 h-4"></i>
+              </a>
+
+              <!-- Botón secundario -->
+              <a href="#servicios" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-md text-sm font-semibold btn-ghost">
+                Ver capacidades técnicas
+              </a>
+            </div>
+          </div>
+
+          <!-- ============================================================ -->
+          <!--  COLUMNA DERECHA · Contenedor preparado para imagen del Hero  -->
+          <!--  Estructura:                                                  -->
+          <!--    <div class="img-frame glow-blue">                          -->
+          <!--      <img src="hero.png" .../>  ← reemplazar por la imagen  -->
+          <!--    </div>                                                    -->
+          <!--  Mientras se carga la imagen real, se muestra el placeholder -->
+          <!--  profesional. Reemplazar el bloque <div class="img-          -->
+          <!--  placeholder"> por la etiqueta <img> cuando esté listo.     -->
+          <!-- ============================================================ -->
+          <div class="lg:col-span-5 reveal reveal-d2">
+            <!-- REEMPLAZAR POR IMAGEN HERO
+                 Fotografía sugerida:
+                 Grupo electrógeno instalado en planta industrial,
+                 encuadre lateral, iluminación controlada, fondo limpio.
+                 Resolución recomendada: 1200x1500 (4:5).
+            -->
+            <div class="relative w-full aspect-[4/5] max-w-[560px] mx-auto rounded-3xl border border-border bg-surface/40 overflow-hidden glow-blue">
+              <!--
+                PLACEHOLDER · Imagen Hero
+                Reemplazar este <div> entero por:
+                  <img src="hero.png" alt="GenControl · Ingeniería industrial"
+                       class="w-full h-full object-cover" />
+                Mantener el contenedor exterior (border / rounded / glow) por estética.
+              -->
+              <div class="img-placeholder w-full h-full rounded-3xl">
+                <span class="ph-tag">GEN-01</span>
+                <span class="ph-tag-accent">Imagen · Hero</span>
+                <!-- Icono: Imagen / fotografía -->
+                <span class="ph-icon"><i data-lucide="image"></i></span>
+                <span class="ph-label">Imagen Hero</span>
+                <span class="ph-note">Reemplazar por fotografía institucional</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Borde inferior con doble trazo (eco wordmark) -->
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="wordmark-strip mx-auto opacity-70"></div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  QUIÉNES SOMOS                                                -->
+    <!-- ============================================================ -->
+    <section id="quienes-somos" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <!-- Encabezado -->
+          <div class="lg:col-span-5 reveal">
+            <span class="tag-mono text-brand-400">// Empresa</span>
+            <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+              Quiénes <span class="text-gradient-blue">somos</span>
+            </h2>
+            <div class="mt-3 wordmark-strip"></div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="lg:col-span-7 reveal reveal-d2">
+            <p class="text-lg lg:text-xl text-zinc-300 leading-relaxed">
+              GenControl S.A. es una empresa argentina especializada en
+              <span class="text-white font-semibold">ingeniería, equipamiento y servicios industriales</span>.
+              Trabajamos junto a clientes que requieren soluciones confiables, escalables y
+              técnicamente exigentes, en proyectos donde los detalles importan.
+            </p>
+            <p class="mt-5 text-lg text-zinc-400 leading-relaxed">
+              Combinamos experiencia, profesionalismo y un compromiso real con cada proyecto.
+              Nos adaptamos a las necesidades específicas de cada industria, ofreciendo un
+              acompañamiento integral — desde el relevamiento inicial hasta la puesta en marcha
+              y el soporte postventa.
+            </p>
+
+            <!-- Pilares -->
+            <div class="mt-10 grid sm:grid-cols-3 gap-3">
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">01</div>
+                <div class="mt-2 font-semibold text-white">Experiencia</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Trayectoria consolidada en proyectos de diversa escala.</p>
+              </div>
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">02</div>
+                <div class="mt-2 font-semibold text-white">Ingeniería</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Soluciones técnicas adaptadas a cada requerimiento.</p>
+              </div>
+              <div class="rounded-xl border border-border bg-surface/60 p-5 card-lift">
+                <div class="tag-mono text-brand-400">03</div>
+                <div class="mt-2 font-semibold text-white">Compromiso</div>
+                <p class="mt-1.5 text-sm text-zinc-400">Acompañamiento real durante todo el ciclo del proyecto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  TRAYECTORIA · Timeline                                       -->
+    <!-- ============================================================ -->
+    <section id="trayectoria" class="py-24 lg:py-32 bg-gradient-to-b from-transparent via-surface/30 to-transparent border-y border-border">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Trayectoria</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Una historia <span class="text-gradient-blue">construida</span> con trabajo
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Más de tres décadas creciendo junto a la industria argentina.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="mt-16 relative">
+          <!-- Línea central -->
+          <div class="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px timeline-line"></div>
+
+          <!--
+            ESTRUCTURA DEL TIMELINE:
+            Duplicar un bloque <article> para agregar un nuevo hito.
+            Alternar clases: lg:flex-row  /  lg:flex-row-reverse
+            Para hito destacado añadir: is-key  al .timeline-dot
+          -->
+          <ol class="space-y-12 lg:space-y-16">
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12">
+                  <div class="font-black text-3xl lg:text-4xl text-white">1998</div>
+                  <div class="tag-mono text-brand-400 mt-2">Inicio de actividades</div>
+                </div>
+                <div class="lg:pl-12 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md">
+                    Nace el proyecto industrial a partir de un equipo técnico con experiencia
+                    en instalaciones y mantenimiento, sentando las bases del conocimiento
+                    que daría lugar a la empresa.
+                  </p>
+                </div>
+              </div>
+              <!-- Dot -->
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12 order-2 lg:order-1 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md lg:ml-auto">
+                    Ampliamos capacidades hacia automatización, tableros y grupos electrógenos.
+                    Primeros acuerdos con clientes industriales de referencia en la región.
+                  </p>
+                </div>
+                <div class="lg:pl-12 order-1 lg:order-2">
+                  <div class="font-black text-3xl lg:text-4xl text-white">Década 2000</div>
+                  <div class="tag-mono text-brand-400 mt-2">Expansión técnica</div>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+            <!-- Hito destacado -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12">
+                  <div class="font-black text-3xl lg:text-4xl text-white">2015</div>
+                  <div class="tag-mono text-accent mt-2">Hito institucional</div>
+                </div>
+                <div class="lg:pl-12 mt-3 lg:mt-0">
+                  <p class="text-zinc-300 leading-relaxed max-w-md">
+                    Se constituye formalmente <span class="text-white font-semibold">GenControl S.A.</span>,
+                    consolidando una estructura empresarial preparada para proyectos de mayor
+                    escala, alcance nacional y nuevos desafíos técnicos.
+                  </p>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot is-key"></span>
+            </li>
+
+            <!-- Hito -->
+            <li class="relative reveal">
+              <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-start pl-12 lg:pl-0">
+                <div class="lg:text-right lg:pr-12 order-2 lg:order-1 mt-3 lg:mt-0">
+                  <p class="text-zinc-400 leading-relaxed max-w-md lg:ml-auto">
+                    Incorporamos representación técnica oficial de marcas estratégicas,
+                    incorporando nuevas líneas de negocio como gases especiales, telemetría
+                    y mantenimiento especializado.
+                  </p>
+                </div>
+                <div class="lg:pl-12 order-1 lg:order-2">
+                  <div class="font-black text-3xl lg:text-4xl text-white">Actualidad</div>
+                  <div class="tag-mono text-brand-400 mt-2">Consolidación</div>
+                </div>
+              </div>
+              <span class="absolute left-4 lg:left-1/2 -translate-x-1/2 top-1 w-4 h-4 rounded-full timeline-dot"></span>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  SERVICIOS · Ingeniería + Equipamiento                        -->
+    <!-- ============================================================ -->
+    <section id="servicios" class="py-24 lg:py-32 border-y border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Capacidades</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Servicios <span class="text-gradient-blue">técnicos</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Dos grandes divisiones que trabajan de manera articulada: <span class="text-white">Ingeniería</span> y <span class="text-white">Equipamiento</span>.
+          </p>
+        </div>
+
+        <div class="mt-14 grid lg:grid-cols-2 gap-6">
+
+          <!-- ============ INGENIERÍA ============ -->
+          <div class="reveal rounded-2xl border border-border bg-surface/60 p-6 lg:p-8 featured-border relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-700/10 via-transparent to-transparent pointer-events-none"></div>
+
+            <div class="relative flex items-center gap-4 pb-6 border-b border-border">
+              <div class="w-12 h-12 rounded-xl bg-brand-700/15 border border-brand-700/40 flex items-center justify-center glow-blue">
+                <!-- Icono: Ingeniería (plano / blueprint industrial) -->
+                <i data-lucide="drafting-compass" class="w-5 h-5 text-brand-400"></i>
+              </div>
+              <div>
+                <h3 class="font-black text-2xl text-white tracking-tightest">INGENIERÍA</h3>
+                <div class="tag-mono text-brand-400 mt-1">Diseño · Proyecto · Ejecución</div>
+              </div>
+            </div>
+
+            <ul class="relative mt-6 grid sm:grid-cols-2 gap-3">
+              <!-- Cada item -->
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Instalaciones industriales -->
+                <i data-lucide="settings-2" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Instalaciones industriales</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Automatización -->
+                <i data-lucide="cpu" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Automatización</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Tableros eléctricos -->
+                <i data-lucide="layout-panel-top" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Tableros</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Mantenimiento -->
+                <i data-lucide="wrench" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Mantenimiento</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Certificaciones / norma -->
+                <i data-lucide="badge-check" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Certificaciones</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Telemetría -->
+                <i data-lucide="activity" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Telemetría</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- ============ EQUIPAMIENTO ============ -->
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-6 lg:p-8 featured-border relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"></div>
+
+            <div class="relative flex items-center gap-4 pb-6 border-b border-border">
+              <div class="w-12 h-12 rounded-xl bg-brand-700/15 border border-brand-700/40 flex items-center justify-center glow-blue">
+                <!-- Icono: Equipamiento (almacén industrial) -->
+                <i data-lucide="package" class="w-5 h-5 text-brand-400"></i>
+              </div>
+              <div>
+                <h3 class="font-black text-2xl text-white tracking-tightest">EQUIPAMIENTO</h3>
+                <div class="tag-mono text-brand-400 mt-1">Suministro · Instalación · Servicio</div>
+              </div>
+            </div>
+
+            <ul class="relative mt-6 grid sm:grid-cols-2 gap-3">
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Grupo electrógeno -->
+                <i data-lucide="power" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Grupos electrógenos</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Compresor -->
+                <i data-lucide="gauge" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Compresores</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Cabinas térmicas -->
+                <i data-lucide="thermometer" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Cabinas térmicas</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Portones rápidos -->
+                <i data-lucide="door-open" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Portones rápidos</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Gases especiales (cilindro) -->
+                <i data-lucide="flask-conical" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Gases especiales</span>
+              </li>
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-bg/30 px-3 py-3 card-lift">
+                <!-- Icono: Motosoldadoras -->
+                <i data-lucide="zap" class="w-5 h-5 text-brand-400 shrink-0"></i>
+                <span class="text-sm font-medium text-zinc-200">Motosoldadoras</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  GASES ESPECIALES · Sección limpia y corporativa              -->
+    <!-- ============================================================ -->
+    <section id="gases" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <!-- Encabezado -->
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Especialidad</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Gases <span class="text-gradient-blue">especiales</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-300 leading-relaxed">
+            Diseñamos, instalamos y mantenemos sistemas de gases especiales para procesos
+            que requieren máximo control, pureza y trazabilidad. Una línea de trabajo que
+            distingue a GenControl en el mercado.
+          </p>
+        </div>
+
+        <!-- Listado de aplicaciones -->
+        <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-3 max-w-4xl text-zinc-200 reveal reveal-d2">
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+            <span>Gabinetes de gases</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+            <span>Suministro para laboratorios</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+            <span>Aplicaciones de alta pureza</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+            <span>Robots de soldadura</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+            <span>Cañerías especiales</span>
+          </li>
+        </ul>
+
+        <!-- Etiquetas técnicas discretas -->
+        <div class="mt-10 flex items-center gap-2 reveal reveal-d3">
+          <span class="tech-tag">GAS-02</span>
+          <span class="tech-tag tech-tag-muted">Alta pureza</span>
+          <span class="tech-tag tech-tag-muted">Trazabilidad</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  REPRESENTACIÓN OFICIAL · MGSC                                -->
+    <!-- ============================================================ -->
+    <section id="representacion" class="py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="reveal grid lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Tarjeta MGSC -->
+          <div class="lg:col-span-7 relative overflow-hidden rounded-3xl border border-border bg-surface/70 featured-border p-8 lg:p-12">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-700/10 to-transparent pointer-events-none"></div>
+            <div class="absolute inset-0 dot-grid opacity-20 pointer-events-none"></div>
+
+            <div class="relative">
+              <span class="tag-mono text-brand-400">// Representación</span>
+              <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white leading-tight">
+                Representante <span class="text-gradient-blue">Técnico y Comercial</span><br/>
+                Oficial
+              </h2>
+              <div class="mt-3 wordmark-strip"></div>
+
+              <p class="mt-6 text-lg text-zinc-300 leading-relaxed max-w-2xl">
+                GenControl es <span class="text-white font-semibold">representante oficial de MGSC</span>,
+                una línea de referencia en equipamiento industrial. Acompañamos a los clientes
+                en la selección técnica, provisión, instalación y servicio postventa de cada
+                solución.
+              </p>
+
+              <div class="mt-8 grid sm:grid-cols-3 gap-3 max-w-2xl">
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Asesoramiento</div>
+                  <div class="mt-1 text-white font-semibold">Especializado</div>
+                </div>
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Suministro</div>
+                  <div class="mt-1 text-white font-semibold">Original</div>
+                </div>
+                <div class="rounded-xl border border-border bg-bg/40 p-4">
+                  <div class="tag-mono text-muted">Servicio</div>
+                  <div class="mt-1 text-white font-semibold">Postventa</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta marca MGSC (placeholder elegante) -->
+          <div class="lg:col-span-5 relative overflow-hidden rounded-3xl border border-border bg-bg/60 p-10 flex flex-col items-center justify-center text-center">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-transparent pointer-events-none"></div>
+
+            <!--
+              ===============================================================
+              PLACEHOLDER LOGO MGSC
+              Reemplazar el bloque <div class="w-32 h-32 ..."> por la imagen
+              oficial manteniendo las mismas proporciones:
+                <img src="/assets/clients/mgsc.png" alt="MGSC"
+                     class="h-20 mx-auto client-logo" />
+              Nota: la clase .client-logo mantiene el efecto grayscale→color.
+              ===============================================================
+            -->
+            <div class="tag-mono text-muted">// Marca representada</div>
+            <div class="relative mt-6 mb-4">
+              <div class="absolute inset-0 blur-2xl bg-brand-500/30 rounded-full"></div>
+              <!--
+                REEMPLAZAR POR LOGO MGSC
+                Logo corporativo de MGSC (oficial, fondo transparente).
+              -->
+              <div class="relative w-32 h-32 rounded-2xl border border-border bg-surface/80 flex items-center justify-center">
+                <span class="font-black italic text-3xl text-white tracking-tightest">MGSC</span>
+              </div>
+            </div>
+            <p class="relative text-zinc-400 text-sm max-w-xs">
+              Logo oficial MGSC — reemplazar el placeholder por la imagen corporativa correspondiente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  EMPRESAS QUE CONFIARON · Logos                                 -->
+    <!-- ============================================================ -->
+    <section id="clientes" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Confianza</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Empresas e instituciones<br/>
+            <span class="text-gradient-blue">que confiaron en nosotros</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            GenControl ha trabajado con empresas e instituciones de referencia.
+            Por la naturaleza de los proyectos, muchos desarrollos permanecen bajo
+            <span class="text-white font-medium">acuerdos de confidencialidad</span>.
+          </p>
+        </div>
+
+        <!--
+          ===============================================================
+          GRILLA DE LOGOS · Placeholders uniformes y editables
+          ---------------------------------------------------------------
+          Estructura de cada tarjeta (misma altura / aspect-[16/9]):
+            - Tarjeta con borde, padding uniforme y card-lift.
+            - Contenido centrado (logo real o placeholder).
+          Para incorporar un logo nuevo:
+            1) Duplicar una tarjeta vacía.
+            2) Reemplazar el <div> interior por:
+                 <img src="/assets/clients/nombre.png" alt="..."
+                      class="client-logo h-12 mx-auto" />
+            3) Mantener la clase .client-logo para conservar el efecto
+               grayscale → color en hover.
+          ===============================================================
+        -->
+        <div class="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+          <!-- 1 · CONAE · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+            <div class="text-center">
+              <div class="font-black text-2xl text-white tracking-tightest">CONAE</div>
+              <div class="tag-mono text-muted mt-1">Espacio</div>
+            </div>
+          </div>
+
+          <!-- 2 · FAdeA · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+            <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">FAdeA</div>
+              <div class="tag-mono text-muted mt-1">Aeronáutica</div>
+            </div>
+          </div>
+
+          <!-- 3 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+
+          <!-- 4 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+
+          <!-- 5 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+
+          <!-- 6 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+
+          <!-- 7 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+
+          <!-- 8 · REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          </div>
+        </div>
+
+        <p class="mt-10 text-sm text-zinc-500 max-w-3xl">
+          Por políticas internas y acuerdos firmados, no divulgamos detalles sobre los proyectos
+          realizados para muchos de nuestros clientes. Agradecemos la confianza depositada en
+          GenControl.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  SECTORES                                                       -->
+    <!-- ============================================================ -->
+    <section id="sectores" class="py-24 lg:py-32 border-y border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Sectores</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            Industrias en las que <span class="text-gradient-blue">operamos</span>
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Trabajamos en sectores donde la ingeniería marca la diferencia.
+            Estas son áreas en las que podemos desarrollar proyectos — sin afirmación de exclusividad.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Sector card · Industria / planta -->
+          <div class="reveal reveal-d1 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Industria / fábrica -->
+              <i data-lucide="factory" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Industria</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Plantas productivas y de manufactura.</p>
+          </div>
+
+          <!-- Sector card · Laboratorios -->
+          <div class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Laboratorio -->
+              <i data-lucide="flask-conical" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Laboratorios</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Infraestructura para análisis e investigación.</p>
+          </div>
+
+          <!-- Sector card · Automotriz -->
+          <div class="reveal reveal-d3 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Automotriz / carro -->
+              <i data-lucide="car" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Automotriz</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Líneas de producción y ensamblaje.</p>
+          </div>
+
+          <!-- Sector card · Energía -->
+          <div class="reveal reveal-d4 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Energía / rayo -->
+              <i data-lucide="zap" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Energía</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Generación, respaldo y distribución.</p>
+          </div>
+
+          <!-- Sector card · Oil & Gas -->
+          <div class="reveal reveal-d1 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-accent/15 blur-2xl group-hover:bg-accent/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Oil & Gas / cilindro de almacenamiento -->
+              <i data-lucide="fuel" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Oil &amp; Gas</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Procesos, instalaciones y servicios especiales.</p>
+          </div>
+
+          <!-- Sector card · Grandes Comercios -->
+          <div class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Comercio / bolsa -->
+              <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Grandes Comercios</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Retail de gran escala y logística.</p>
+          </div>
+
+          <!-- Sector card · Aeroespacial -->
+          <div class="reveal reveal-d3 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Aeroespacial / cohete -->
+              <i data-lucide="rocket" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Aeroespacial</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Proveeduría técnica especializada.</p>
+          </div>
+
+          <!-- Sector card · Otros -->
+          <div class="reveal reveal-d4 group rounded-2xl border border-border bg-surface/60 p-6 card-lift overflow-hidden relative">
+            <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-700/15 blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+            <div class="relative w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center mb-5">
+              <!-- Icono: Otros / cuadrícula -->
+              <i data-lucide="layout-grid" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <h3 class="relative font-bold text-white text-lg">Otros</h3>
+            <p class="relative mt-1.5 text-sm text-zinc-400">Nuevos sectores bajo requerimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  CONTACTO · Tarjetas (sin formulario)                          -->
+    <!-- ============================================================ -->
+    <section id="contacto" class="py-24 lg:py-32 border-t border-border bg-gradient-to-b from-surface/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-3xl reveal">
+          <span class="tag-mono text-brand-400">// Contacto</span>
+          <h2 class="mt-4 font-black tracking-tightest text-4xl lg:text-5xl text-white">
+            ¿Tiene un <span class="text-gradient-blue">proyecto</span> en curso?
+          </h2>
+          <div class="mt-3 wordmark-strip"></div>
+          <p class="mt-6 text-lg text-zinc-400">
+            Escríbanos por el canal que prefiera. Respondemos con una propuesta clara.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Teléfono -->
+          <a href="#" data-link="phone" class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-6 card-lift block">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <!-- Icono: Teléfono -->
+              <i data-lucide="phone" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Teléfono</div>
+            <div class="mt-2 font-semibold text-white" data-info="phone">+54 XXX XXX-XXXX</div>
+          </a>
+
+          <!-- Email -->
+          <a href="#" data-link="email" class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-6 card-lift block">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <!-- Icono: Email -->
+              <i data-lucide="mail" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Email</div>
+            <div class="mt-2 font-semibold text-white break-all" data-info="email">info@gencontrol.com.ar</div>
+          </a>
+
+          <!-- Dirección -->
+          <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <!-- Icono: Ubicación / pin -->
+              <i data-lucide="map-pin" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Dirección</div>
+            <div class="mt-2 font-semibold text-white" data-info="address">Córdoba, Argentina</div>
+          </div>
+
+          <!-- Horarios -->
+          <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-6 card-lift">
+            <div class="w-11 h-11 rounded-lg border border-border bg-bg/60 flex items-center justify-center">
+              <!-- Icono: Reloj / horarios -->
+              <i data-lucide="clock" class="w-5 h-5 text-brand-400"></i>
+            </div>
+            <div class="mt-5 tag-mono text-muted">Horarios</div>
+            <div class="mt-2 font-semibold text-white" data-info="hours">Lun a Vie — 08:00 a 18:00</div>
+          </div>
+        </div>
+
+        <!-- CTA whatsapp grande -->
+        <div class="mt-14 reveal reveal-d2">
+          <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-r from-brand-700/30 via-brand-600/15 to-surface/40 p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+              <h3 class="font-black text-2xl lg:text-3xl text-white tracking-tightest">¿Tiene un proyecto entre manos?</h3>
+              <p class="mt-2 text-zinc-300 max-w-xl">Conversemos. Le enviamos una propuesta técnica a la medida.</p>
+            </div>
+            <a href="#" data-link="whatsapp" class="inline-flex items-center gap-2.5 px-6 py-4 rounded-md text-sm font-semibold btn-primary shrink-0">
+              Hablar por WhatsApp
+              <!-- Icono: WhatsApp / mensaje -->
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!--  FOOTER · 3 columnas + línea separadora + créditos          -->
+  <!-- ============================================================ -->
+  <footer class="border-t border-border bg-surface/30">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-12">
+
+        <!-- Columna 1: Identidad -->
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <!-- Reemplazar logo.png si cambia el nombre del archivo. -->
+            <img src="logo.png" alt="GenControl" class="h-10 w-auto" />
+            <div class="flex flex-col leading-none">
+              <span class="font-black tracking-tightest text-white text-lg uppercase italic">GenControl</span>
+              <span class="tag-mono text-muted mt-1">Servicios Industriales · S.A.</span>
+            </div>
+          </div>
+
+          <p class="mt-6 text-zinc-400 leading-relaxed max-w-md">
+            GenControl S.A. desarrolla ingeniería, equipamiento y servicios industriales para
+            empresas que requieren resultados confiables.
+          </p>
+
+          <div class="mt-6 flex flex-col gap-2 text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+              <!-- Icono: Ubicación -->
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>
+              <span data-info="address">Córdoba, Argentina</span>
+            </div>
+          </div>
+
+          <!-- Redes -->
+          <div class="mt-6 flex items-center gap-3">
+            <a href="#" data-link="linkedin" aria-label="LinkedIn" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <!-- Icono: LinkedIn -->
+              <i data-lucide="linkedin" class="w-4 h-4 text-zinc-300"></i>
+            </a>
+            <a href="#" data-link="instagram" aria-label="Instagram" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <!-- Icono: Instagram -->
+              <i data-lucide="instagram" class="w-4 h-4 text-zinc-300"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div class="lg:col-span-3">
+          <div class="tag-mono text-brand-400">Navegación</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="#quienes-somos" class="text-sm text-zinc-400 hover:text-white transition-colors">Empresa</a></li>
+            <li><a href="#servicios"     class="text-sm text-zinc-400 hover:text-white transition-colors">Servicios</a></li>
+            <li><a href="#gases"         class="text-sm text-zinc-400 hover:text-white transition-colors">Especialidades</a></li>
+            <li><a href="#proyectos"     class="text-sm text-zinc-400 hover:text-white transition-colors">Proyectos</a></li>
+            <li><a href="#clientes"      class="text-sm text-zinc-400 hover:text-white transition-colors">Empresas</a></li>
+            <li><a href="#sectores"      class="text-sm text-zinc-400 hover:text-white transition-colors">Sectores</a></li>
+            <li><a href="#contacto"      class="text-sm text-zinc-400 hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicios destacados -->
+        <div class="lg:col-span-4">
+          <div class="tag-mono text-brand-400">Servicios destacados</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Ingeniería · Instalaciones</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Automatización &amp; tableros</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Grupos electrógenos</a></li>
+            <li><a href="#gases"     class="text-sm text-zinc-400 hover:text-white transition-colors">Gases especiales</a></li>
+            <li><a href="#representacion" class="text-sm text-zinc-400 hover:text-white transition-colors">Representación MGSC</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Línea separadora + créditos -->
+      <div class="mt-14 pt-8 border-t border-border flex flex-col-reverse md:flex-row items-center justify-between gap-5 text-sm">
+        <div class="text-zinc-500" data-info="copyright">
+          © <span data-info="year">2025</span> GenControl S.A. · Todos los derechos reservados.
+        </div>
+        <div class="text-zinc-400 flex items-center gap-2 flex-wrap justify-center">
+          <span>Hecho por</span>
+          <a href="#" data-link="benjamin" class="font-semibold text-white hover:text-brand-400 transition-colors">Benjamín Rincón</a>
+          <span class="text-zinc-600">&</span>
+          <a href="#" data-link="santiago" class="font-semibold text-white hover:text-brand-400 transition-colors">Santiago Rodríguez</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================ -->
+  <!--  FLOATING BUTTONS · WhatsApp + Email                          -->
+  <!-- ============================================================ -->
+  <div class="fixed right-5 bottom-5 z-40 flex flex-col items-end gap-3">
+
+    <!-- WhatsApp -->
+    <a href="#" data-link="whatsapp" aria-label="WhatsApp"
+       class="fab group flex items-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 pl-3 pr-4 py-3 hover:bg-emerald-400">
+      <span class="relative flex w-6 h-6 items-center justify-center">
+        <span class="absolute inset-0 rounded-full bg-emerald-400/60 animate-ping"></span>
+        <!-- Icono: WhatsApp (placeholder Lucide: círculo de mensaje) -->
+        <i data-lucide="message-circle" class="w-5 h-5 relative"></i>
+      </span>
+      <span class="label text-sm font-semibold">WhatsApp</span>
+    </a>
+
+    <!-- Email -->
+    <a href="#" data-link="email" aria-label="Email"
+       class="fab group flex items-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 pl-3 pr-4 py-3 hover:bg-brand-500">
+      <!-- Icono: Email -->
+      <i data-lucide="mail" class="w-5 h-5"></i>
+      <span class="label text-sm font-semibold">Email</span>
+    </a>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!--  JAVASCRIPT · CONFIG único + toda la lógica                   -->
+  <!-- ============================================================ -->
+  <script>
+    'use strict';
+
+    /* =====================================================================
+       CONFIG · ÚNICO OBJETO DE EDICIÓN
+       Toda la información del sitio se toma desde aquí.
+       Modificá los valores entre comillas y listo.
+       ===================================================================== */
+    const CONFIG = {
+      // ==== Datos de contacto (EDITAR) ==== //
+      company: {
+        name:     'GenControl S.A.',
+        phone:    '+54 351 555-1234',                  // EDITAR — teléfono visible
+        phoneRaw: '+543515551234',                     // EDITAR — sólo números (para wa.me / tel:)
+        whatsapp: '+543515551234',                     // EDITAR — sólo números, formato internacional
+        email:    'info@gencontrol.com.ar',            // EDITAR
+        address:  'Córdoba Capital, Argentina',         // EDITAR
+        hours:    'Lun a Vie · 08:00 a 18:00',         // EDITAR
+      },
+
+      // ==== Redes sociales ==== //
+      social: {
+        linkedin:  '#',   // EDITAR
+        instagram: '#',   // EDITAR
+      },
+
+      // ==== Autores del sitio (clicankeables en footer) ==== //
+      authors: {
+        benjamin: {
+          name: 'Benjamín Rincón',
+          url:  'https://instagram.com/',              // EDITAR
+        },
+        santiago: {
+          name: 'Santiago Rodríguez',
+          url:  'https://instagram.com/',              // EDITAR
+        },
+      },
+
+      // ==== Datos clave ==== //
+      startedYear: 1998,         // Año de origen (trayectoria)
+      foundedYear: 2015,         // Constitución GenControl S.A.
+      foundedTag:  'Hito institucional',
+
+      // ==== MGSC ==== //
+      mgsc: {
+        role: 'Representante Técnico y Comercial Oficial',
+      },
+    };
+
+
+    /* =====================================================================
+       HELPERS · Pequeñas utilidades DOM
+       ===================================================================== */
+    const $  = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+
+    /* =====================================================================
+       0) LUCIDE ICONS · Inicializar todos los <i data-lucide="...">
+       ===================================================================== */
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+
+
+    /* =====================================================================
+       1) REVEAL ANIMATIONS · IntersectionObserver
+       ===================================================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    $$('.reveal').forEach((el) => revealObserver.observe(el));
+
+
+    /* =====================================================================
+       2) HEADER · Comportamiento al hacer scroll
+       ===================================================================== */
+    const headerInner = $('#header-inner');
+    // Clase base del header (en el HTML):  bg-bg/70 border-b border-transparent
+    // Al scrollear cambiamos a una versión más opaca y con borde visible.
+    const setHeaderState = () => {
+      const y = window.scrollY;
+      if (y > 30) {
+        headerInner.classList.add('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
+        headerInner.classList.remove('bg-bg/70', 'border-transparent');
+      } else {
+        headerInner.classList.remove('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
+        headerInner.classList.add('bg-bg/70', 'border-transparent');
+      }
+    };
+    setHeaderState();
+    window.addEventListener('scroll', setHeaderState, { passive: true });
+
+
+    /* =====================================================================
+       3) MENÚ MÓVIL
+       ===================================================================== */
+    const menuBtn   = $('#menu-toggle');
+    const mobileNav = $('#mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Cerrar menú al tocar un link
+    $$('#mobile-menu a').forEach((a) => a.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+
+    /* =====================================================================
+       4) INYECCIÓN DE DATOS · CONFIG → DOM
+       ===================================================================== */
+    // [data-info="phone"]   → CONFIG.company.phone
+    // [data-info="email"]   → CONFIG.company.email
+    // [data-info="address"] → CONFIG.company.address
+    // [data-info="hours"]   → CONFIG.company.hours
+    $$('[data-info]').forEach((el) => {
+      const key = el.dataset.info;
+      const map = {
+        phone:   CONFIG.company.phone,
+        email:   CONFIG.company.email,
+        address: CONFIG.company.address,
+        hours:   CONFIG.company.hours,
+        year:    new Date().getFullYear(),
+      };
+      if (map[key]) el.textContent = map[key];
+    });
+
+    // Copyright automático
+    const copyrightEl = document.querySelector('[data-info="copyright"]');
+    if (copyrightEl) {
+      copyrightEl.innerHTML = `© ${new Date().getFullYear()} ${CONFIG.company.name} · Todos los derechos reservados.`;
+    }
+
+    // [data-link] · Enlaces dinámicos
+    //   phone     → tel:+549...
+    //   email     → mailto:...
+    //   whatsapp  → https://wa.me/...
+    //   linkedin  → CONFIG.social.linkedin
+    //   instagram → CONFIG.social.instagram
+    //   benjamin  → CONFIG.authors.benjamin.url
+    //   santiago  → CONFIG.authors.santiago.url
+    $$('[data-link]').forEach((el) => {
+      const type = el.dataset.link;
+      let href = '#';
+      switch (type) {
+        case 'phone':
+          href = `tel:${CONFIG.company.phoneRaw}`;
+          break;
+        case 'email':
+          href = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent('Consulta desde el sitio web')}`;
+          break;
+        case 'whatsapp':
+          href = `https://wa.me/${CONFIG.company.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer una consulta técnica.')}`;
+          break;
+        case 'linkedin':
+          href = CONFIG.social.linkedin;
+          break;
+        case 'instagram':
+          href = CONFIG.social.instagram;
+          break;
+        case 'benjamin':
+          href = CONFIG.authors.benjamin.url;
+          el.textContent = CONFIG.authors.benjamin.name;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          break;
+        case 'santiago':
+          href = CONFIG.authors.santiago.url;
+          el.textContent = CONFIG.authors.santiago.name;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          break;
+      }
+      el.setAttribute('href', href);
+      // Para enlaces externos (autores): abrir en pestaña nueva
+      if (['benjamin', 'santiago', 'linkedin', 'instagram'].includes(type) && href !== '#') {
+        el.target = '_blank';
+        el.rel = 'noopener noreferrer';
+      }
+    });
+
+
+    /* =====================================================================
+       5) ACCESIBILIDAD · Cerrar menú con Escape
+       ===================================================================== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
+        mobileNav.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+  </script>
+
+</body>
+</html>
