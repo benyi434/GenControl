@@ -418,23 +418,23 @@
     <!-- Línea superior con gradiente triple (azul → rojo → transparente) -->
     <div class="header-line opacity-60"></div>
 
-    <div id="header-inner" class="header-blur bg-bg/70 border-b border-transparent transition-all duration-300">
-      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
+    <div id="header-inner"
+        class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-24 lg:h-28 flex items-center justify-between">
 
         <!--
           ===== LOGOTIPO =====
           Si se renombra el archivo, cambiar únicamente logo.png por el nuevo nombre
           en los tres lugares donde aparece: header, footer y favicon (futuro).
         -->
-        <a href="#hero" class="flex items-center gap-3 group" aria-label="GenControl — Inicio">
-          <!-- Reemplazar logo.png si cambia el nombre del archivo. -->
-          <img src="logo.png" alt="GenControl" class="h-10 lg:h-11 w-auto" />
-          <!-- Wordmark -->
-          <div class="flex flex-col leading-none">
-            <span class="font-black tracking-tightest text-white text-lg lg:text-xl uppercase italic">GenControl</span>
-            <span class="tag-mono text-muted mt-1">Servicios Industriales</span>
-          </div>
-        </a>
+        <a href="#hero" class="group">
+
+    <img
+        src="logo-header.png"
+        alt="GenControl Servicios Industriales"
+        class="h-14 lg:h-20 w-auto"/>
+
+</a>
 
         <!-- ===== Navegación desktop ===== -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
@@ -1026,24 +1026,40 @@
           </div>
 
           <!-- 3 · REEMPLAZAR POR LOGO EMPRESA -->
-       <!--   <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
-            <!-- REEMPLAZAR POR LOGO EMPRESA 
-          </div> -->
+         <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+            <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">EPEC</div>
+              <div class="tag-mono text-muted mt-1">Energía</div>
+            </div>
+          </div>
 
           <!-- 4 · REEMPLAZAR POR LOGO EMPRESA -->
-      <!--    <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
-            <!-- REEMPLAZAR POR LOGO EMPRESA 
-          </div> -->
+         <div class="reveal reveal-d4 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA  -->
+          <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">ECOGAS</div>
+              <div class="tag-mono text-muted mt-1">Gases</div>
+            </div>
+          </div>
 
           <!-- 5 · REEMPLAZAR POR LOGO EMPRESA -->
-        <!--  <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
-            <!-- REEMPLAZAR POR LOGO EMPRESA 
-          </div> -->
+        <div class="reveal reveal-d1 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">FIAT</div>
+              <div class="tag-mono text-muted mt-1">Automotriz</div>
+            </div>
+          </div>
 
           <!-- 6 · REEMPLAZAR POR LOGO EMPRESA -->
-         <!-- <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
-            <!-- REEMPLAZAR POR LOGO EMPRESA 
-          </div> -->
+        <div class="reveal reveal-d2 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
+            <!-- REEMPLAZAR POR LOGO EMPRESA -->
+          <div class="text-center">
+              <div class="font-black italic text-xl text-white tracking-tightest">AGUAS CORDOBESAS</div>
+              <div class="tag-mono text-muted mt-1">Servicio de Agua</div>
+            </div>
+          </div>
 
           <!-- 7 · REEMPLAZAR POR LOGO EMPRESA -->
         <!--  <div class="reveal reveal-d3 rounded-2xl border border-border bg-surface/60 p-7 flex items-center justify-center aspect-[16/9] card-lift overflow-hidden">
@@ -1231,7 +1247,7 @@
               <i data-lucide="clock" class="w-5 h-5 text-brand-400"></i>
             </div>
             <div class="mt-5 tag-mono text-muted">Horarios</div>
-            <div class="mt-2 font-semibold text-white" data-info="hours">Lun a Vie — 08:00 a 18:00</div>
+            <div class="mt-2 font-semibold text-white" data-info="hours">Lun a Vie — 08:00 a 17:00</div>
           </div>
         </div>
 
