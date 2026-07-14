@@ -420,56 +420,53 @@
 
     <div id="header-inner"
         class="bg-white border-b border-gray-200 shadow-sm">
-      <div class="max-w-screen-2xl mx-auto px-6 lg:px-10 h-20 lg:h-24 flex items-center">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-24 lg:h-28 flex items-center justify-between">
 
         <!--
           ===== LOGOTIPO =====
           Si se renombra el archivo, cambiar únicamente logo.png por el nuevo nombre
           en los tres lugares donde aparece: header, footer y favicon (futuro).
         -->
-        <div class="flex justify-center lg:justify-start lg:min-w-[360px]">
-    <a href="#hero">
-        <img
-            src="logo-header.png"
-            alt="GenControl"
-            class="h-14 lg:h-20 xl:h-24 w-auto object-contain">
-    </a>
-</div>
+        <a class="group" href="#hero">
+
+    <img src="logo-header.png" alt="GenControl Servicios Industriales" class="h-14 lg:h-20 w-auto">
+
+</a>
+
         <!-- ===== Navegación desktop ===== -->
-        <nav class="hidden lg:flex items-center gap-8 ml-auto" aria-label="Navegación principal">
+        <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
           <!--
             NOTA: href="#" apunta a la sección por id.
             Para agregar/quitar items, duplicar o borrar el bloque <a>.
           -->
-          <a href="#quienes-somos"   class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresa</a>
-          <a href="#servicios"       class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Servicios</a>
-          <a href="#gases"           class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Especialidades</a>
-          <a href="#clientes"        class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresas</a>
-          <a href="#sectores"        class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Sectores</a>
-          <a href="#contacto"        class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
+          <a href="#quienes-somos" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresa</a>
+          <a href="#servicios" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Servicios</a>
+          <a href="#gases" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Especialidades</a>
+          <a href="#clientes" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresas</a>
+          <a href="#sectores" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Sectores</a>
+          <a href="#contacto" class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
             Contacto
             <!-- Icono: Flecha derecha (acción / ir a) -->
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-3.5 h-3.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </a>
         </nav>
 
         <!-- ===== Botón hamburguesa (mobile) =====
              Icono: Menú hamburguesa (apertura de navegación móvil) -->
-        <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
-                class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border bg-surface/60 hover:bg-surface transition-colors">
-          <i id="menu-icon" data-lucide="menu" class="w-5 h-5"></i>
+        <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border bg-surface/60 hover:bg-surface transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" aria-hidden="true" id="menu-icon" class="lucide lucide-menu w-5 h-5"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
         </button>
       </div>
 
       <!-- ===== Menú móvil desplegable ===== -->
       <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-white backdrop-blur">
         <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1" aria-label="Navegación móvil">
-          <a href="#quienes-somos"   class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Empresa</a>
-          <a href="#servicios"       class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Servicios</a>
-          <a href="#gases"           class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Especialidades</a>
-          <a href="#clientes"        class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Empresas</a>
-          <a href="#sectores"        class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Sectores</a>
-          <a href="#contacto"        class="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold btn-primary">Ir a contacto</a>
+          <a href="#quienes-somos" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresa</a>
+          <a href="#servicios" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Servicios</a>
+          <a href="#gases" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Especialidades</a>
+          <a href="#clientes" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresas</a>
+          <a href="#sectores" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Sectores</a>
+          <a href="#contacto" class="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold btn-primary">Ir a contacto</a>
         </nav>
       </div>
     </div>
@@ -1403,7 +1400,7 @@
         whatsapp: '+543515551234',                     // EDITAR — sólo números, formato internacional
         email:    'info@gencontrol.com.ar',            // EDITAR
         address:  'Villa Ballester 4063 B. Carrara, Córdoba',         // EDITAR
-        hours:    'Lun a Vie · 08:00 a 18:00',         // EDITAR
+        hours:    'Lun a Vie · 08:00 a 17:00',         // EDITAR
       },
 
       // ==== Redes sociales ==== //
