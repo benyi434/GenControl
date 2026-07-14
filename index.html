@@ -420,19 +420,21 @@
 
     <div id="header-inner"
         class="bg-white border-b border-gray-200 shadow-sm">
-      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-24 lg:h-28 flex items-center justify-between">
+      <div class="max-w-screen-2xl mx-auto px-8 lg:px-12 h-28 lg:h-36 flex items-center justify-between">
 
         <!--
           ===== LOGOTIPO =====
           Si se renombra el archivo, cambiar únicamente logo.png por el nuevo nombre
           en los tres lugares donde aparece: header, footer y favicon (futuro).
         -->
-        <a href="#hero" class="group">
+        <div class="flex-1 flex justify-center lg:justify-start">
+    <a href="#hero" class="group">
+      </div>
 
     <img
         src="logo-header.png"
         alt="GenControl Servicios Industriales"
-        class="h-14 lg:h-20 w-auto"/>
+         class="h-20 lg:h-28 xl:h-32 w-auto object-contain"/>
 
 </a>
 
@@ -442,11 +444,11 @@
             NOTA: href="#" apunta a la sección por id.
             Para agregar/quitar items, duplicar o borrar el bloque <a>.
           -->
-          <a href="#quienes-somos"   class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Empresa</a>
-          <a href="#servicios"       class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Servicios</a>
-          <a href="#gases"           class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Especialidades</a>
-          <a href="#clientes"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Empresas</a>
-          <a href="#sectores"        class="px-3 py-2 text-sm text-zinc-300 hover:text-white transition-colors">Sectores</a>
+          <a href="#quienes-somos"   class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresa</a>
+          <a href="#servicios"       class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Servicios</a>
+          <a href="#gases"           class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Especialidades</a>
+          <a href="#clientes"        class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Empresas</a>
+          <a href="#sectores"        class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Sectores</a>
           <a href="#contacto"        class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
             Contacto
             <!-- Icono: Flecha derecha (acción / ir a) -->
@@ -463,13 +465,13 @@
       </div>
 
       <!-- ===== Menú móvil desplegable ===== -->
-      <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-bg/95 backdrop-blur">
+      <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-white backdrop-blur">
         <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1" aria-label="Navegación móvil">
-          <a href="#quienes-somos"   class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Empresa</a>
-          <a href="#servicios"       class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Servicios</a>
-          <a href="#gases"           class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Especialidades</a>
-          <a href="#clientes"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Empresas</a>
-          <a href="#sectores"        class="px-3 py-3 rounded-md text-sm text-zinc-300 hover:bg-surface hover:text-white">Sectores</a>
+          <a href="#quienes-somos"   class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Empresa</a>
+          <a href="#servicios"       class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Servicios</a>
+          <a href="#gases"           class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Especialidades</a>
+          <a href="#clientes"        class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Empresas</a>
+          <a href="#sectores"        class="px-3 py-3 rounded-md text-sm text-zinc-700 hover:bg-surface hover:text-blue-700">Sectores</a>
           <a href="#contacto"        class="mt-2 inline-flex items-center justify-center px-4 py-3 rounded-md text-sm font-semibold btn-primary">Ir a contacto</a>
         </nav>
       </div>
@@ -477,7 +479,7 @@
   </header>
 
   <!-- Spacer invisible para que el contenido no quede debajo del header sticky -->
-  <div class="h-16 lg:h-20" aria-hidden="true"></div>
+  <div class="h-28 lg:h-36" aria-hidden="true"></div>
 
 
   <main>
@@ -501,7 +503,7 @@
                 <span class="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70"></span>
                 <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-400"></span>
               </span>
-              <span class="tag-mono text-zinc-300">Ingeniería · Equipamiento · Automatización</span>
+              <span class="tag-mono text-zinc-700">Ingeniería · Equipamiento · Automatización</span>
             </div>
 
             <!-- Título principal — palabra destacada con gradiente azul -->
@@ -572,7 +574,7 @@
 
           <!-- Contenido -->
           <div class="lg:col-span-7 reveal reveal-d2">
-            <p class="text-lg lg:text-xl text-zinc-300 leading-relaxed">
+            <p class="text-lg lg:text-xl text-zinc-700 leading-relaxed">
               GenControl S.A. es una empresa argentina especializada en
               <span class="text-white font-semibold">ingeniería, equipamiento y servicios industriales</span>.
               Trabajamos junto a clientes que requieren soluciones confiables, escalables y
@@ -682,7 +684,7 @@
                   <div class="tag-mono text-accent mt-2">Hito institucional</div>
                 </div>
                 <div class="lg:pl-12 mt-3 lg:mt-0">
-                  <p class="text-zinc-300 leading-relaxed max-w-md">
+                  <p class="text-zinc-700 leading-relaxed max-w-md">
                     Se constituye formalmente <span class="text-white font-semibold">GenControl S.A.</span>,
                     consolidando una estructura empresarial preparada para proyectos de mayor
                     escala, alcance nacional y nuevos desafíos técnicos.
@@ -851,7 +853,7 @@
             Gases <span class="text-gradient-blue">especiales</span>
           </h2>
           <div class="mt-3 wordmark-strip"></div>
-          <p class="mt-6 text-lg text-zinc-300 leading-relaxed">
+          <p class="mt-6 text-lg text-zinc-700 leading-relaxed">
             Diseñamos, instalamos y mantenemos sistemas de gases especiales para procesos
             que requieren máximo control, pureza y trazabilidad. Una línea de trabajo que
             distingue a GenControl en el mercado.
@@ -913,7 +915,7 @@
               </h2>
               <div class="mt-3 wordmark-strip"></div>
 
-              <p class="mt-6 text-lg text-zinc-300 leading-relaxed max-w-2xl">
+              <p class="mt-6 text-lg text-zinc-700 leading-relaxed max-w-2xl">
                 GenControl es <span class="text-white font-semibold">representante oficial de MGSC</span>,
                 una línea de referencia en equipamiento industrial. Acompañamos a los clientes
                 en la selección técnica, provisión, instalación y servicio postventa de cada
@@ -1256,7 +1258,7 @@
           <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-r from-brand-700/30 via-brand-600/15 to-surface/40 p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div>
               <h3 class="font-black text-2xl lg:text-3xl text-white tracking-tightest">¿Tiene un proyecto entre manos?</h3>
-              <p class="mt-2 text-zinc-300 max-w-xl">Conversemos. Le enviamos una propuesta técnica a la medida.</p>
+              <p class="mt-2 text-zinc-700 max-w-xl">Conversemos. Le enviamos una propuesta técnica a la medida.</p>
             </div>
             <a href="#" data-link="whatsapp" class="inline-flex items-center gap-2.5 px-6 py-4 rounded-md text-sm font-semibold btn-primary shrink-0">
               Hablar por WhatsApp
@@ -1320,12 +1322,12 @@
         <div class="lg:col-span-3">
           <div class="tag-mono text-brand-400">Navegación</div>
           <ul class="mt-5 space-y-3">
-            <li><a href="#quienes-somos" class="text-sm text-zinc-400 hover:text-white transition-colors">Empresa</a></li>
-            <li><a href="#servicios"     class="text-sm text-zinc-400 hover:text-white transition-colors">Servicios</a></li>
-            <li><a href="#gases"         class="text-sm text-zinc-400 hover:text-white transition-colors">Especialidades</a></li>
-            <li><a href="#clientes"      class="text-sm text-zinc-400 hover:text-white transition-colors">Empresas</a></li>
-            <li><a href="#sectores"      class="text-sm text-zinc-400 hover:text-white transition-colors">Sectores</a></li>
-            <li><a href="#contacto"      class="text-sm text-zinc-400 hover:text-white transition-colors">Contacto</a></li>
+            <li><a href="#quienes-somos" class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Empresa</a></li>
+            <li><a href="#servicios"     class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Servicios</a></li>
+            <li><a href="#gases"         class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Especialidades</a></li>
+            <li><a href="#clientes"      class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Empresas</a></li>
+            <li><a href="#sectores"      class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Sectores</a></li>
+            <li><a href="#contacto"      class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Contacto</a></li>
           </ul>
         </div>
 
@@ -1333,11 +1335,11 @@
         <div class="lg:col-span-4">
           <div class="tag-mono text-brand-400">Servicios destacados</div>
           <ul class="mt-5 space-y-3">
-            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Ingeniería · Instalaciones</a></li>
-            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Automatización &amp; tableros</a></li>
-            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-white transition-colors">Grupos electrógenos</a></li>
-            <li><a href="#gases"     class="text-sm text-zinc-400 hover:text-white transition-colors">Gases especiales</a></li>
-            <li><a href="#representacion" class="text-sm text-zinc-400 hover:text-white transition-colors">Representación MGSC</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Ingeniería · Instalaciones</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Automatización &amp; tableros</a></li>
+            <li><a href="#servicios" class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Grupos electrógenos</a></li>
+            <li><a href="#gases"     class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Gases especiales</a></li>
+            <li><a href="#representacion" class="text-sm text-zinc-400 hover:text-blue-700 transition-colors">Representación MGSC</a></li>
           </ul>
         </div>
       </div>
@@ -1474,15 +1476,30 @@
     // Clase base del header (en el HTML):  bg-bg/70 border-b border-transparent
     // Al scrollear cambiamos a una versión más opaca y con borde visible.
     const setHeaderState = () => {
-      const y = window.scrollY;
-      if (y > 30) {
-        headerInner.classList.add('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
-        headerInner.classList.remove('bg-bg/70', 'border-transparent');
-      } else {
-        headerInner.classList.remove('bg-bg/90', 'border-border', 'shadow-2xl', 'shadow-black/40');
-        headerInner.classList.add('bg-bg/70', 'border-transparent');
-      }
-    };
+
+    if (window.scrollY > 30) {
+
+        headerInner.classList.add(
+            'shadow-lg'
+        );
+
+        headerInner.classList.remove(
+            'shadow-sm'
+        );
+
+    } else {
+
+        headerInner.classList.remove(
+            'shadow-lg'
+        );
+
+        headerInner.classList.add(
+            'shadow-sm'
+        );
+
+    }
+
+}
     setHeaderState();
     window.addEventListener('scroll', setHeaderState, { passive: true });
 
