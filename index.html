@@ -414,7 +414,7 @@
   <!-- ============================================================ -->
   <!--  HEADER · Sticky, responsive, logo, menú, contacto, hamburger -->
   <!-- ============================================================ -->
-  <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <header class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300">
     <!-- Línea superior con gradiente triple (azul → rojo → transparente) -->
     <div class="header-line opacity-60"></div>
 
@@ -1469,7 +1469,35 @@
     /* =====================================================================
        2) HEADER · Comportamiento al hacer scroll
        ===================================================================== */
-    const headerInner = $('#header-inner');
+   const header = document.querySelector("header");
+const headerInner = document.getElementById("header-inner");
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+
+    const currentScroll = window.pageYOffset;
+
+    // Arriba del todo
+    if (currentScroll <= 0) {
+        header.style.transform = "translateY(0)";
+        headerInner.classList.add("shadow-sm");
+        return;
+    }
+
+    // Bajando
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        header.style.transform = "translateY(-100%)";
+    }
+
+    // Subiendo
+    else {
+        header.style.transform = "translateY(0)";
+    }
+
+    lastScroll = currentScroll;
+
+});
     // Clase base del header (en el HTML):  bg-bg/70 border-b border-transparent
     // Al scrollear cambiamos a una versión más opaca y con borde visible.
     const setHeaderState = () => {
