@@ -420,26 +420,23 @@
 
     <div id="header-inner"
         class="bg-white border-b border-gray-200 shadow-sm">
-      <div class="max-w-screen-2xl mx-auto px-8 lg:px-12 h-28 lg:h-36 flex items-center justify-between">
+      <div class="max-w-screen-2xl mx-auto px-6 lg:px-10 h-20 lg:h-24 flex items-center">
 
         <!--
           ===== LOGOTIPO =====
           Si se renombra el archivo, cambiar únicamente logo.png por el nuevo nombre
           en los tres lugares donde aparece: header, footer y favicon (futuro).
         -->
-        <div class="flex-1 flex justify-center lg:justify-start">
-    <a href="#hero" class="group">
-      </div>
-
-    <img
-        src="logo-header.png"
-        alt="GenControl Servicios Industriales"
-         class="h-20 lg:h-28 xl:h-32 w-auto object-contain"/>
-
-</a>
-
+        <div class="flex justify-center lg:justify-start lg:min-w-[360px]">
+    <a href="#hero">
+        <img
+            src="logo-header.png"
+            alt="GenControl"
+            class="h-14 lg:h-20 xl:h-24 w-auto object-contain">
+    </a>
+</div>
         <!-- ===== Navegación desktop ===== -->
-        <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+        <nav class="hidden lg:flex items-center gap-8 ml-auto" aria-label="Navegación principal">
           <!--
             NOTA: href="#" apunta a la sección por id.
             Para agregar/quitar items, duplicar o borrar el bloque <a>.
@@ -479,7 +476,7 @@
   </header>
 
   <!-- Spacer invisible para que el contenido no quede debajo del header sticky -->
-  <div class="h-28 lg:h-36" aria-hidden="true"></div>
+  <div class="h-20 lg:h-24" aria-hidden="true"></div>
 
 
   <main>
