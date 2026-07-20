@@ -1415,9 +1415,9 @@
     const CONFIG = {
       company: {
         name:     'GenControl S.A.',
-        phone:    '+54 351 555-1234',
-        phoneRaw: '+543515551234',
-        whatsapp: '+543515551234',
+        phone:    '+54 351 874-0000',
+        phoneRaw: '+543518740000',
+        whatsapp: '+543518740000',
         email:    'info@gencontrol.com.ar',
         address:  'Villa Ballester 4063 B. Carrara, Córdoba',
         hours:    'Lun a Vie · 08:00 a 17:00',
