@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catálogo técnico de GenControl S.A. · Grupos electrógenos, compresores, sistemas de elevación y componentes críticos de automatización. Stock inmediato e ingeniería a medida." />
+  <meta name="theme-color" content="#09090B" />
+  <title>Catálogo Técnico · GenControl S.A. — Equipamiento Industrial</title>
+
+  <!-- ============================================================ -->
+  <!-- FAVICON · Mismo favicon que la home                          -->
+  <!-- ============================================================ -->
+  <link rel="icon" type="image/png" href="../favicon.png" />
+
+  <!-- FontAwesome (mantener consistencia con la home) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <!-- ============================================================ -->
+  <!-- GOOGLE FONTS · Inter + JetBrains Mono · Misma carga que home -->
+  <!-- ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================ -->
+  <!-- LUCIDE ICONS · Iconografía vectorial                         -->
+  <!-- ============================================================ -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- ============================================================ -->
+  <!-- TAILWIND CSS · Misma config que la home                       -->
+  <!-- ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            bg:       'rgb(9 9 11 / <alpha-value>)',
+            surface:  'rgb(24 24 27 / <alpha-value>)',
+            surface2: 'rgb(31 31 35 / <alpha-value>)',
+            border:   'rgb(39 39 42 / <alpha-value>)',
+            muted:    'rgb(161 161 170 / <alpha-value>)',
+            subtle:   'rgb(113 113 122 / <alpha-value>)',
+            brand: {
+              DEFAULT: 'rgb(29 78 216 / <alpha-value>)',
+              50:  'rgb(239 246 255 / <alpha-value>)',
+              100: 'rgb(219 234 254 / <alpha-value>)',
+              200: 'rgb(191 219 254 / <alpha-value>)',
+              300: 'rgb(147 197 253 / <alpha-value>)',
+              400: 'rgb(96 165 250 / <alpha-value>)',
+              500: 'rgb(59 130 246 / <alpha-value>)',
+              600: 'rgb(37 99 235 / <alpha-value>)',
+              700: 'rgb(29 78 216 / <alpha-value>)',
+              800: 'rgb(30 64 175 / <alpha-value>)',
+              900: 'rgb(30 58 138 / <alpha-value>)',
+            },
+            accent: 'rgb(220 38 38 / <alpha-value>)',
+          },
+          letterSpacing: {
+            'tightest': '-0.04em',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- ESTILOS PERSONALIZADOS · Copiados de la home + ajustes catál. -->
+  <!-- ============================================================ -->
+  <style>
+    /* ===== Reset suave + tipografía base ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      background: #09090B;
+      color: #E4E4E7;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-feature-settings: 'ss01', 'cv11';
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: #1d4ed8; color: white; }
+
+    /* ===== Custom scrollbar ===== */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #09090B; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+    /* ===== Reveal on scroll ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: .08s; }
+    .reveal-d2 { transition-delay: .16s; }
+    .reveal-d3 { transition-delay: .24s; }
+    .reveal-d4 { transition-delay: .32s; }
+    .reveal-d5 { transition-delay: .40s; }
+
+    /* ===== Halo azul premium ===== */
+    .glow-blue {
+      box-shadow:
+        0 0 0 1px rgba(59,130,246,.18),
+        0 12px 40px -12px rgba(29,78,216,.45),
+        inset 0 1px 0 0 rgba(255,255,255,.04);
+    }
+
+    /* ===== Card lift (hover elegante) ===== */
+    .card-lift {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease, background-color .35s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,.4);
+      background-color: #1F1F23;
+    }
+
+    /* ===== Fondos técnicos ===== */
+    .tech-grid {
+      background-image:
+        linear-gradient(rgba(59,130,246,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at center, #000 30%, transparent 75%);
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* ===== Etiqueta monoespaciada tipo instrumental ===== */
+    .tag-mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ===== Botones premium (mismas reglas que la home) ===== */
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      box-shadow: 0 8px 24px -8px rgba(29,78,216,.7), inset 0 1px 0 0 rgba(255,255,255,.18);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 32px -8px rgba(29,78,216,.85), inset 0 1px 0 0 rgba(255,255,255,.22);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.02);
+      color: #E4E4E7;
+      border: 1px solid #27272A;
+      transition: all .25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: #3b82f6;
+      background: rgba(59,130,246,.06);
+      color: white;
+    }
+    /* ===== Botón premium ROJO (acento) ===== */
+    .btn-accent {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      box-shadow: 0 8px 24px -8px rgba(220,38,38,.7), inset 0 1px 0 0 rgba(255,255,255,.18);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .btn-accent:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      box-shadow: 0 12px 32px -8px rgba(220,38,38,.85), inset 0 1px 0 0 rgba(255,255,255,.22);
+    }
+
+    /* ===== Línea animada que recorre el header sticky ===== */
+    .header-line {
+      background: linear-gradient(90deg, transparent, #1d4ed8, #dc2626, transparent);
+      height: 1px;
+    }
+
+    /* ===== Backdrop blur ===== */
+    .header-blur {
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+    }
+
+    /* ===== Borde decorativo featured ===== */
+    .featured-border { position: relative; }
+    .featured-border::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(29,78,216,.7), rgba(220,38,38,.4), rgba(29,78,216,.0));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ===== Wordmark strip (eco branding) ===== */
+    .wordmark-strip {
+      position: relative;
+      height: 12px;
+      width: 64px;
+    }
+    .wordmark-strip::before, .wordmark-strip::after {
+      content: ''; position: absolute; left: 0; right: 0;
+      height: 2px; border-radius: 2px;
+    }
+    .wordmark-strip::before { top: 0;  background: linear-gradient(90deg, #1d4ed8, transparent); }
+    .wordmark-strip::after  { top: 8px; background: linear-gradient(90deg, #dc2626, transparent); height: 1.5px; }
+
+    /* ===== Text gradient ===== */
+    .text-gradient-blue {
+      background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ===== Microetiquetas técnicas (chips) ===== */
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .62rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      padding: 3px 8px;
+      border: 1px solid rgba(59,130,246,.22);
+      border-radius: 3px;
+      background: rgba(29,78,216,.06);
+    }
+    .tech-tag-muted {
+      color: #71717a;
+      border-color: rgba(63,63,70,.6);
+      background: rgba(24,24,27,.4);
+    }
+    .tech-line {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #71717a;
+    }
+    .tech-line::before,
+    .tech-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,.3), transparent);
+    }
+
+    /* ============================================================ */
+    /*  PLACEHOLDER DE PRODUCTO · Estilo plano / blueprint          */
+    /*  Reutilizado tal como en el catálogo anterior                */
+    /* ============================================================ */
+    .product-visual {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      background:
+        radial-gradient(ellipse at center, rgba(24,24,27,.85) 0%, rgba(9,9,11,.95) 100%);
+      border-bottom: 1px solid rgba(63,63,70,.6);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse at center, #000 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 80%);
+      pointer-events: none;
+    }
+    .product-visual .dim {
+      position: absolute;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
+      color: rgba(96,165,250,.7);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .product-visual .dim::before,
+    .product-visual .dim::after {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: rgba(96,165,250,.5);
+    }
+    .product-visual .dim-top    { top: 10px;    left: 50%; transform: translateX(-50%); }
+    .product-visual .dim-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .product-visual .dim-left   { left: 10px;   top: 50%;  transform: translateY(-50%) rotate(-90deg); transform-origin: left center; }
+    .product-visual .dim-right  { right: 10px;  top: 50%;  transform: translateY(-50%) rotate(90deg);  transform-origin: right center; }
+
+    .product-visual .corner {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: rgba(96,165,250,.45);
+      border-style: solid;
+    }
+    .product-visual .corner.tl { top: 8px;    left: 8px;    border-width: 1.5px 0 0 1.5px; }
+    .product-visual .corner.tr { top: 8px;    right: 8px;   border-width: 1.5px 1.5px 0 0; }
+    .product-visual .corner.bl { bottom: 8px; left: 8px;    border-width: 0 0 1.5px 1.5px; }
+    .product-visual .corner.br { bottom: 8px; right: 8px;   border-width: 0 1.5px 1.5px 0; }
+
+    .product-visual .serial {
+      position: absolute;
+      bottom: 22px;
+      right: 12px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 9px;
+      letter-spacing: .18em;
+      color: rgba(161,161,170,.55);
+      text-transform: uppercase;
+    }
+
+    /* ============================================================ */
+    /*  STATUS PILLS                                                */
+    /* ============================================================ */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .status-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+    }
+    .status-stock {
+      color: #34d399;
+      background: rgba(16,185,129,.08);
+      border: 1px solid rgba(16,185,129,.35);
+    }
+    .status-stock .dot { background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,.6); }
+    .status-pedido {
+      color: #fbbf24;
+      background: rgba(245,158,11,.08);
+      border: 1px solid rgba(245,158,11,.35);
+    }
+    .status-pedido .dot { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,.5); }
+    .status-medida {
+      color: #93c5fd;
+      background: rgba(29,78,216,.08);
+      border: 1px solid rgba(29,78,216,.35);
+    }
+    .status-medida .dot { background: #60a5fa; box-shadow: 0 0 8px rgba(59,130,246,.5); }
+
+    /* ============================================================ */
+    /*  BUSCADOR · Estilo limpio "estilo plataforma profesional"    */
+    /* ============================================================ */
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(24,24,27,.95) 0%, rgba(9,9,11,.95) 100%);
+      border: 1.5px solid #27272A;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .search-wrap:focus-within {
+      border-color: rgba(59,130,246,.55);
+      box-shadow: 0 0 0 4px rgba(29,78,216,.15);
+    }
+    .search-wrap input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 20px 16px 20px 0;
+      color: white;
+      font-size: 15.5px;
+      font-family: 'Inter', sans-serif;
+      min-width: 0;
+    }
+    .search-wrap input::placeholder { color: #71717a; }
+    .search-wrap .icon-box {
+      padding: 0 14px 0 20px;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+    }
+    .search-wrap .search-btn {
+      margin: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border: 0;
+      transition: filter .2s ease, transform .2s ease;
+      box-shadow: 0 8px 24px -8px rgba(29,78,216,.7), inset 0 1px 0 0 rgba(255,255,255,.18);
+    }
+    .search-wrap .search-btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+
+    /* Chips de búsquedas populares */
+    .search-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: 12.5px;
+      color: #d4d4d8;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      border: 1px solid #3f3f46;
+      background: rgba(24,24,27,.5);
+      transition: all .2s ease;
+      cursor: pointer;
+    }
+    .search-chip:hover {
+      border-color: rgba(59,130,246,.55);
+      background: rgba(29,78,216,.1);
+      color: white;
+    }
+
+    /* ============================================================ */
+    /*  FILTROS · Sidebar limpio                                    */
+    /* ============================================================ */
+    .filter-card {
+      background: linear-gradient(180deg, rgba(24,24,27,.85) 0%, rgba(9,9,11,.7) 100%);
+      border: 1px solid #27272A;
+      border-radius: 16px;
+      padding: 18px 18px 20px;
+    }
+    .filter-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13.5px;
+      color: #d4d4d8;
+      transition: background .2s ease, color .2s ease;
+      user-select: none;
+    }
+    .filter-item:hover {
+      background: rgba(59,130,246,.08);
+      color: white;
+    }
+    .filter-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #52525b;
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: all .2s ease;
+    }
+    .filter-item input[type="checkbox"]:checked {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      border-color: #3b82f6;
+    }
+    .filter-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .filter-count {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      color: #71717a;
+      letter-spacing: .12em;
+    }
+
+    /* Floating action buttons (WhatsApp / Email) */
+    .fab {
+      transition: width .35s cubic-bezier(.16,1,.3,1), padding .35s ease, transform .25s ease;
+    }
+    .fab .label { opacity: 0; max-width: 0; transition: max-width .35s ease, opacity .25s ease; overflow: hidden; white-space: nowrap; }
+    .fab:hover .label { opacity: 1; max-width: 200px; margin-left: .6rem; }
+    .fab:hover { transform: translateY(-2px); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<!-- ================================================================ -->
+<!--  CUERPO DE LA PÁGINA                                              -->
+<!-- ================================================================ -->
+<body class="bg-bg text-zinc-200 antialiased">
+
+  <!-- ============================================================ -->
+  <!--  HEADER · Réplica exacta del index principal                  -->
+  <!--  Mismo logo, misma altura, mismos colores, mismo scroll.      -->
+  <!-- ============================================================ -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300">
+    <!-- Línea superior con gradiente triple (azul → rojo → transparente) -->
+    <div class="header-line opacity-60"></div>
+
+    <div id="header-inner"
+        class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 h-24 lg:h-28 flex items-center justify-between">
+
+        <!--
+          ===== LOGOTIPO =====
+          Reutilizamos el mismo archivo "logo-header.png" que la home.
+          Este archivo vive en /catalogo, por eso la ruta "../logo-header.png".
+        -->
+        <a class="group" href="../">
+          <img src="../logo-header.png" alt="GenControl Servicios Industriales" class="h-14 lg:h-20 w-auto">
+        </a>
+
+        <!-- ===== Navegación desktop · categorías del catálogo ===== -->
+        <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal del catálogo">
+
+          <!--
+            En el catálogo la nav apunta a las secciones del propio catálogo
+            (mismo patrón de la home, pero adaptado al contexto).
+          -->
+          <a href="#grupos"         class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Grupos Electrógenos</a>
+          <a href="#compresores"    class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Compresores</a>
+          <a href="#elevacion"      class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Elevación</a>
+          <a href="#automatizacion" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Automatización</a>
+
+          <!--
+            ===============================================================
+            GRUPO DE CTAs
+              - Botón ROJO "Volver al Inicio" con icono home (Lucide)
+                MISMO estilo que el "Ver Catálogo" de la home.
+              - Botón AZUL "Cotizar Equipos" con icono mail.
+                MISMO estilo que el "Contacto" de la home.
+            ===============================================================
+          -->
+          <a href="../"
+             class="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-accent">
+            Volver al Inicio
+            <!-- Icono: Home (Lucide) -->
+            <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          </a>
+
+          <a href="../#contacto"
+             class="ml-2 inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold btn-primary">
+            Cotizar Equipos
+            <!-- Icono: Mail (Lucide) -->
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+          </a>
+        </nav>
+
+        <!-- ===== Botón hamburguesa (mobile) ===== -->
+        <button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+                class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-border bg-surface/60 hover:bg-surface transition-colors">
+          <i id="menu-icon" data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- ===== Menú móvil ===== -->
+      <div id="mobile-menu" class="lg:hidden hidden border-t border-border bg-white">
+        <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1" aria-label="Navegación móvil del catálogo">
+          <a href="#grupos"         class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Grupos Electrógenos</a>
+          <a href="#compresores"    class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Compresores</a>
+          <a href="#elevacion"      class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Elevación</a>
+          <a href="#automatizacion" class="px-3 py-2 text-sm text-zinc-700 hover:text-blue-700 transition-colors">Automatización</a>
+
+          <a href="../"
+             class="mt-2 w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-md text-sm font-semibold btn-accent">
+            Volver al Inicio
+            <i data-lucide="home" class="w-4 h-4"></i>
+          </a>
+
+          <a href="../#contacto"
+             class="mt-2 w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-md text-sm font-semibold btn-primary">
+            Cotizar Equipos
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer para header sticky (mismo alto que la home) -->
+  <div class="h-24 lg:h-28" aria-hidden="true"></div>
+
+
+  <main>
+
+    <!-- ============================================================ -->
+    <!--  HERO · Buscador técnico + identidad industrial              -->
+    <!-- ============================================================ -->
+    <section id="hero" class="relative overflow-hidden">
+      <!-- Fondos: grilla técnica + viñeta inferior (mismo patrón home) -->
+      <div class="absolute inset-0 tech-grid opacity-60 pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg pointer-events-none"></div>
+
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 pt-14 lg:pt-24 pb-16 lg:pb-24">
+        <div class="text-center max-w-4xl mx-auto reveal">
+
+          <!-- Tag superior monoespaciado (acento rojo) -->
+          <span class="tag-mono text-accent">// Suministro &amp; Equipamiento Industrial</span>
+
+          <!-- H1 principal -->
+          <h1 class="mt-5 font-black tracking-tightest text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] text-white">
+            Catálogo de
+            <span class="text-gradient-blue">Equipamiento</span><br />
+            y Componentes <span class="text-gradient-blue">Críticos</span>
+          </h1>
+
+          <!-- Trazo wordmark -->
+          <div class="mt-5 wordmark-strip mx-auto"></div>
+
+          <!-- Descripción -->
+          <p class="mt-6 text-base lg:text-lg text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+            Soluciones técnicas de <span class="text-white font-medium">alta complejidad</span> para ingeniería de planta.
+            Stock inmediato, configuración bajo pedido e ingeniería a medida.
+          </p>
+
+          <!-- Microetiquetas técnicas -->
+          <div class="mt-7 flex items-center justify-center gap-2 flex-wrap">
+            <span class="tech-tag">CAT-01</span>
+            <span class="tech-tag tech-tag-muted">Stock Inmediato</span>
+            <span class="tech-tag tech-tag-muted">Córdoba · AR</span>
+            <span class="tech-tag tech-tag-muted">+30 Años</span>
+          </div>
+        </div>
+
+        <!-- ====================================================== -->
+        <!--  BUSCADOR · Limpio, profesional, "estilo MercadoLibre"  -->
+        <!-- ====================================================== -->
+        <div class="mt-12 max-w-3xl mx-auto reveal reveal-d2">
+          <form id="search-form" class="search-wrap" onsubmit="event.preventDefault();">
+            <span class="icon-box">
+              <i data-lucide="search" class="w-5 h-5"></i>
+            </span>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar por equipo, marca, potencia o código…"
+              autocomplete="off" />
+            <button type="submit" class="search-btn" id="search-btn">
+              Buscar
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+          <!-- Búsquedas populares (chips) -->
+          <div class="mt-5 flex items-center justify-center gap-2 flex-wrap">
+            <span class="tag-mono text-zinc-500 mr-1">Popular:</span>
+            <button type="button" class="search-chip" data-suggestion="Cummins">Cummins</button>
+            <button type="button" class="search-chip" data-suggestion="Compresor">Compresores</button>
+            <button type="button" class="search-chip" data-suggestion="Siemens">Siemens</button>
+            <button type="button" class="search-chip" data-suggestion="Variador">Variadores</button>
+            <button type="button" class="search-chip" data-suggestion="Puente Grúa">Puente Grúa</button>
+          </div>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto reveal reveal-d3">
+          <div class="text-center">
+            <div class="font-black text-2xl lg:text-3xl text-white">+500</div>
+            <div class="tag-mono text-zinc-500 mt-1">Equipos despachados</div>
+          </div>
+          <div class="text-center">
+            <div class="font-black text-2xl lg:text-3xl text-white">4</div>
+            <div class="tag-mono text-zinc-500 mt-1">Líneas de producto</div>
+          </div>
+          <div class="text-center">
+            <div class="font-black text-2xl lg:text-3xl text-white">+12</div>
+            <div class="tag-mono text-zinc-500 mt-1">Marcas representadas</div>
+          </div>
+          <div class="text-center">
+            <div class="font-black text-2xl lg:text-3xl text-white">24/7</div>
+            <div class="tag-mono text-zinc-500 mt-1">Soporte de planta</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wordmark strip inferior -->
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="wordmark-strip mx-auto opacity-60"></div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  CATÁLOGO · Sidebar filtros + Grid de productos              -->
+    <!-- ============================================================ -->
+    <section id="catalogo" class="py-16 lg:py-24">
+      <div class="max-w-screen-2xl mx-auto px-5 lg:px-10">
+        <div class="grid lg:grid-cols-12 gap-8">
+
+          <!-- ====================================================== -->
+          <!--  COLUMNA IZQUIERDA · Sidebar de filtros (1/4)         -->
+          <!-- ====================================================== -->
+          <aside class="lg:col-span-3 reveal">
+            <div class="sticky top-36 space-y-5">
+
+              <!-- Botón limpiar filtros (aparece si hay alguno activo) -->
+              <button id="clear-filters" type="button"
+                      class="hidden w-full inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-md text-xs font-semibold btn-ghost">
+                <i data-lucide="filter-x" class="w-3.5 h-3.5"></i>
+                Limpiar filtros
+              </button>
+
+              <!-- Filtro: Categorías -->
+              <div class="filter-card" data-filter-group="categoria">
+                <div class="filter-label">
+                  <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                  Categoría
+                </div>
+                <div class="space-y-1">
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="categoria" value="grupos" checked />
+                    <span>Grupos Electrógenos</span>
+                    <span class="filter-count" data-count="grupos">02</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="categoria" value="compresores" checked />
+                    <span>Compresores</span>
+                    <span class="filter-count" data-count="compresores">02</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="categoria" value="elevacion" checked />
+                    <span>Elevación</span>
+                    <span class="filter-count" data-count="elevacion">01</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="categoria" value="automatizacion" checked />
+                    <span>Automatización</span>
+                    <span class="filter-count" data-count="automatizacion">02</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Filtro: Estado de stock -->
+              <div class="filter-card" data-filter-group="stock">
+                <div class="filter-label">
+                  <i data-lucide="package" class="w-3.5 h-3.5"></i>
+                  Estado de Stock
+                </div>
+                <div class="space-y-1">
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="stock" value="inmediato" checked />
+                    <span class="status-pill status-stock" style="padding: 2px 6px;"><span class="dot"></span>Stock Inmediato</span>
+                    <span class="filter-count" data-count="stock-inmediato">03</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="stock" value="pedido" checked />
+                    <span class="status-pill status-pedido" style="padding: 2px 6px;"><span class="dot"></span>Bajo Pedido</span>
+                    <span class="filter-count" data-count="stock-pedido">03</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="stock" value="medida" checked />
+                    <span class="status-pill status-medida" style="padding: 2px 6px;"><span class="dot"></span>Ingeniería a Medida</span>
+                    <span class="filter-count" data-count="stock-medida">01</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Filtro: Marcas -->
+              <div class="filter-card" data-filter-group="marca">
+                <div class="filter-label">
+                  <i data-lucide="factory" class="w-3.5 h-3.5"></i>
+                  Marca
+                </div>
+                <div class="space-y-1">
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="cummins" checked />
+                    <span>Cummins</span>
+                    <span class="filter-count" data-count="marca-cummins">02</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="schulz" checked />
+                    <span>Schulz</span>
+                    <span class="filter-count" data-count="marca-schulz">01</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="siemens" checked />
+                    <span>Siemens</span>
+                    <span class="filter-count" data-count="marca-siemens">01</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="abb" checked />
+                    <span>ABB</span>
+                    <span class="filter-count" data-count="marca-abb">01</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="mgsc" checked />
+                    <span>MGSC</span>
+                    <span class="filter-count" data-count="marca-mgsc">01</span>
+                  </label>
+                  <label class="filter-item">
+                    <input type="checkbox" data-filter="marca" value="gencontrol" checked />
+                    <span>GenControl</span>
+                    <span class="filter-count" data-count="marca-gencontrol">01</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
+
+          <!-- ====================================================== -->
+          <!--  COLUMNA DERECHA · Grid de productos (3/4)             -->
+          <!-- ====================================================== -->
+          <div class="lg:col-span-9">
+
+            <!-- Toolbar superior: contador + orden -->
+            <div class="reveal flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-border">
+              <div>
+                <div class="tag-mono text-zinc-500">Resultados</div>
+                <div class="mt-1 text-white font-semibold">
+                  <span id="results-count">7</span> equipos disponibles
+                  <span class="text-zinc-500 text-sm font-normal">· Actualizado en tiempo real</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 text-xs text-zinc-500 font-mono">
+                  <span class="relative flex w-1.5 h-1.5">
+                    <span class="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-70"></span>
+                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  </span>
+                  STOCK · LIVE
+                </div>
+                <label class="flex items-center gap-2 text-xs text-zinc-500 font-mono">
+                  <span class="hidden sm:inline">Ordenar:</span>
+                  <select id="sort-select" class="bg-surface border border-border text-zinc-200 text-sm rounded-md px-3 py-2 outline-none focus:border-brand-500 cursor-pointer">
+                    <option value="relevance">Relevancia</option>
+                    <option value="name">Nombre A–Z</option>
+                    <option value="stock">Stock primero</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <!-- =========================================== -->
+            <!--  GRID DE PRODUCTOS · Modular / Escalable     -->
+            <!--                                             -->
+            <!--  ESTRUCTURA DE CADA <article data-product>:  -->
+            <!--  - data-categoria : grupos | compresores |   -->
+            <!--                    elevacion | automatizacion -->
+            <!--  - data-marca     : cummins | schulz | ...   -->
+            <!--  - data-stock     : inmediato | pedido |     -->
+            <!--                    medida                    -->
+            <!--  - data-name      : nombre libre             -->
+            <!--  - data-id        : código interno           -->
+            <!--                                             -->
+            <!--  Para agregar un producto:                   -->
+            <!--  1) Duplicar un <article> existente.         -->
+            <!--  2) Actualizar data-* y contenido interno.   -->
+            <!--  3) Mantener la misma jerarquía visual.      -->
+            <!--  4) Actualizar los contadores en la          -->
+            <!--     sidebar (data-count="...").              -->
+            <!-- =========================================== -->
+            <div id="products-grid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 1 · Compresor Schulz (Stock Inmediato) -->
+              <!-- ============================================== -->
+              <article
+                class="reveal group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="compresores"
+                data-marca="schulz"
+                data-stock="inmediato"
+                data-name="Compresor Schulz SRP 7.5 kW"
+                data-id="COMP-SRP-7.5">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">7.5 kW</span>
+                  <span class="dim dim-bottom">120 PSI</span>
+                  <i data-lucide="gauge" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">SRP-7.5 · ID-7281</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-stock"><span class="dot"></span>Stock Inmediato</span>
+                    <span class="tech-tag">Compresor</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Compresor de Tornillo Schulz SRP 7.5 kW</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">SCHULZ · BRASIL</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Potencia</td><td class="py-2 text-right text-zinc-200 font-mono">7.5 kW</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Presión máx.</td><td class="py-2 text-right text-zinc-200 font-mono">12 bar</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Caudal</td><td class="py-2 text-right text-zinc-200 font-mono">0.95 m³/min</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Voltaje</td><td class="py-2 text-right text-zinc-200 font-mono">380 V</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 2 · Grupo Electrógeno Cummins          -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d1 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="grupos"
+                data-marca="cummins"
+                data-stock="inmediato"
+                data-name="Grupo Electrógeno Cummins C110 D5"
+                data-id="GEN-C110-D5">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">110 kVA</span>
+                  <span class="dim dim-bottom">DIESEL</span>
+                  <i data-lucide="power" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">C110-D5 · ID-7302</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-stock"><span class="dot"></span>Stock Inmediato</span>
+                    <span class="tech-tag">Generación</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Grupo Electrógeno Cummins C110 D5 · Insonorizado</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">CUMMINS · USA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Potencia</td><td class="py-2 text-right text-zinc-200 font-mono">110 kVA</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Frecuencia</td><td class="py-2 text-right text-zinc-200 font-mono">50 Hz</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Voltaje</td><td class="py-2 text-right text-zinc-200 font-mono">380 V</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Autonomía</td><td class="py-2 text-right text-zinc-200 font-mono">8 h</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 3 · Puente Grúa MGSC (Bajo Pedido)     -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="elevacion"
+                data-marca="mgsc"
+                data-stock="pedido"
+                data-name="Puente Grúa Birrail 10 t"
+                data-id="ELEV-PG-10T">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">10 t</span>
+                  <span class="dim dim-bottom">BIRRAIL</span>
+                  <i data-lucide="crane" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">PG-10T · ID-7405</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-pedido"><span class="dot"></span>Bajo Pedido</span>
+                    <span class="tech-tag">Elevación</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Puente Grúa Birrail 10 t · Configuración a Medida</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">MGSC · CHINA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Capacidad</td><td class="py-2 text-right text-zinc-200 font-mono">10 t</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Luz</td><td class="py-2 text-right text-zinc-200 font-mono">16 a 32 m</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Velocidad</td><td class="py-2 text-right text-zinc-200 font-mono">0.5–8 m/min</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Voltaje</td><td class="py-2 text-right text-zinc-200 font-mono">380 V</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 4 · PLC Siemens S7-1200 (Stock)        -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d3 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="automatizacion"
+                data-marca="siemens"
+                data-stock="inmediato"
+                data-name="PLC Siemens S7-1200 CPU 1214C"
+                data-id="PLC-S7-1214C">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">DC/DC/DC</span>
+                  <span class="dim dim-bottom">14 I/O</span>
+                  <i data-lucide="cpu" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">S7-1214C · ID-7510</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-stock"><span class="dot"></span>Stock Inmediato</span>
+                    <span class="tech-tag">Automatización</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">PLC Siemens S7-1200 · CPU 1214C DC/DC/DC</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">SIEMENS · ALEMANIA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Entradas</td><td class="py-2 text-right text-zinc-200 font-mono">14 DI 24V DC</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Salidas</td><td class="py-2 text-right text-zinc-200 font-mono">10 DO Relay</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Memoria</td><td class="py-2 text-right text-zinc-200 font-mono">100 kB</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Profinet</td><td class="py-2 text-right text-zinc-200 font-mono">Sí · 1 puerto</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 5 · Variador ABB ACS580 (Bajo Pedido)  -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d4 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="automatizacion"
+                data-marca="abb"
+                data-stock="pedido"
+                data-name="Variador ABB ACS580 22 kW"
+                data-id="DRV-ACS580-22">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">22 kW</span>
+                  <span class="dim dim-bottom">IP21</span>
+                  <i data-lucide="zap" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">ACS580 · ID-7620</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-pedido"><span class="dot"></span>Bajo Pedido</span>
+                    <span class="tech-tag">Variador</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Variador de Frecuencia ABB ACS580 · 22 kW</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">ABB · SUIZA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Potencia</td><td class="py-2 text-right text-zinc-200 font-mono">22 kW</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Corriente</td><td class="py-2 text-right text-zinc-200 font-mono">45 A</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Tensión</td><td class="py-2 text-right text-zinc-200 font-mono">380–480 V</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Grado IP</td><td class="py-2 text-right text-zinc-200 font-mono">IP21</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 6 · Grupo Electrógeno 250 kVA (Pedido)  -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d5 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="grupos"
+                data-marca="cummins"
+                data-stock="pedido"
+                data-name="Grupo Electrógeno Cummins C250 D5"
+                data-id="GEN-C250-D5">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">250 kVA</span>
+                  <span class="dim dim-bottom">STANDBY</span>
+                  <i data-lucide="power" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">C250-D5 · ID-7701</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-pedido"><span class="dot"></span>Bajo Pedido</span>
+                    <span class="tech-tag">Generación</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Grupo Electrógeno Cummins C250 D5 · 250 kVA Standby</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">CUMMINS · USA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Potencia</td><td class="py-2 text-right text-zinc-200 font-mono">250 kVA</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Standby</td><td class="py-2 text-right text-zinc-200 font-mono">275 kVA</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Frecuencia</td><td class="py-2 text-right text-zinc-200 font-mono">50 Hz</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Autonomía</td><td class="py-2 text-right text-zinc-200 font-mono">10 h</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- ============================================== -->
+              <!-- PRODUCTO 7 · Tablero a Medida (Ingeniería)       -->
+              <!-- ============================================== -->
+              <article
+                class="reveal reveal-d2 group rounded-2xl border border-border bg-surface/60 overflow-hidden card-lift flex flex-col"
+                data-product
+                data-categoria="automatizacion"
+                data-marca="gencontrol"
+                data-stock="medida"
+                data-name="Tablero de Control a Medida"
+                data-id="TBL-CUSTOM-01">
+                <div class="product-visual">
+                  <span class="corner tl"></span><span class="corner tr"></span>
+                  <span class="corner bl"></span><span class="corner br"></span>
+                  <span class="dim dim-top">CUSTOM</span>
+                  <span class="dim dim-bottom">INGENIERÍA</span>
+                  <i data-lucide="layout-panel-top" style="width:88px;height:88px;color:#60a5fa;opacity:.85;"></i>
+                  <span class="serial">GC-CUSTOM · ID-7801</span>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="status-pill status-medida"><span class="dot"></span>Ingeniería a Medida</span>
+                    <span class="tech-tag">Tablero</span>
+                  </div>
+                  <h3 class="mt-4 font-bold text-white text-lg leading-tight">Tablero de Control y Potencia · Ingeniería a Medida</h3>
+                  <p class="mt-1 text-xs text-zinc-500 font-mono tracking-wider">GENCONTROL · ARGENTINA</p>
+
+                  <table class="mt-5 w-full text-xs border-t border-border">
+                    <tbody class="divide-y divide-border">
+                      <tr><td class="py-2 text-zinc-500">Diseño</td><td class="py-2 text-right text-zinc-200 font-mono">Personalizado</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Norma</td><td class="py-2 text-right text-zinc-200 font-mono">IEC 61439</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Plazo</td><td class="py-2 text-right text-zinc-200 font-mono">30–60 días</td></tr>
+                      <tr><td class="py-2 text-zinc-500">Ensayo</td><td class="py-2 text-right text-zinc-200 font-mono">FAT incluido</td></tr>
+                    </tbody>
+                  </table>
+
+                  <a href="../#contacto" class="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-primary">
+                    Solicitar Cotización
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- Empty state (oculto por defecto, lo muestra el JS) -->
+            <div id="empty-state" class="hidden text-center py-20">
+              <div class="w-14 h-14 mx-auto rounded-full border border-border bg-surface/60 flex items-center justify-center">
+                <i data-lucide="search-x" class="w-6 h-6 text-zinc-500"></i>
+              </div>
+              <p class="mt-5 text-zinc-300 font-semibold">No se encontraron equipos</p>
+              <p class="mt-1 text-sm text-zinc-500 max-w-sm mx-auto">Probá quitar algunos filtros o modificar el término de búsqueda.</p>
+              <button id="empty-clear" type="button"
+                      class="mt-6 inline-flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold btn-ghost">
+                <i data-lucide="filter-x" class="w-4 h-4"></i>
+                Limpiar filtros
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  SECCIÓN APOYO · Cómo cotizar                                 -->
+    <!-- ============================================================ -->
+    <section class="py-16 lg:py-24 border-t border-border bg-gradient-to-b from-surface/20 to-transparent">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+
+          <div class="lg:col-span-7 reveal">
+            <span class="tag-mono text-brand-400">// Proceso de cotización</span>
+            <h2 class="mt-4 font-black tracking-tightest text-3xl lg:text-4xl text-white">
+              Cotizá en 4 pasos
+              <span class="text-gradient-blue">técnicos</span>
+            </h2>
+            <div class="mt-3 wordmark-strip"></div>
+            <p class="mt-6 text-zinc-400 leading-relaxed max-w-2xl">
+              Cada solicitud se procesa con un criterio de ingeniería. No es un
+              formulario genérico: nuestro equipo evalúa los parámetros operativos
+              antes de emitir una propuesta.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 grid sm:grid-cols-2 gap-3 reveal reveal-d2">
+            <div class="rounded-xl border border-border bg-surface/60 p-4 card-lift">
+              <div class="tag-mono text-brand-400">01</div>
+              <div class="mt-1 font-semibold text-white text-sm">Selección</div>
+              <p class="mt-1 text-xs text-zinc-500">Elegís el equipo del catálogo.</p>
+            </div>
+            <div class="rounded-xl border border-border bg-surface/60 p-4 card-lift">
+              <div class="tag-mono text-brand-400">02</div>
+              <div class="mt-1 font-semibold text-white text-sm">Cotización</div>
+              <p class="mt-1 text-xs text-zinc-500">Recibís precio y plazo.</p>
+            </div>
+            <div class="rounded-xl border border-border bg-surface/60 p-4 card-lift">
+              <div class="tag-mono text-brand-400">03</div>
+              <div class="mt-1 font-semibold text-white text-sm">Validación</div>
+              <p class="mt-1 text-xs text-zinc-500">Confirmamos disponibilidad real.</p>
+            </div>
+            <div class="rounded-xl border border-border bg-surface/60 p-4 card-lift">
+              <div class="tag-mono text-accent">04</div>
+              <div class="mt-1 font-semibold text-white text-sm">Despacho</div>
+              <p class="mt-1 text-xs text-zinc-500">Entrega y soporte postventa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!--  FOOTER · Réplica EXACTA del index principal                  -->
+  <!--  Misma estructura, colores, botones, iconos, datos,           -->
+  <!--  redes, efecto visual y créditos finales.                     -->
+  <!-- ============================================================ -->
+  <footer class="border-t border-border bg-surface/30">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-12">
+
+        <!-- Columna 1: Identidad -->
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <!--
+              Logo del footer · Mismo archivo que la home.
+              Como este archivo vive en /catalogo, la ruta es "../logo.png".
+            -->
+            <img src="../logo.png" alt="GenControl" class="h-10 w-auto" />
+            <div class="flex flex-col leading-none">
+              <span class="font-black tracking-tightest text-white text-lg uppercase italic">GenControl</span>
+              <span class="tag-mono text-muted mt-1">Servicios Industriales · S.A.</span>
+            </div>
+          </div>
+
+          <p class="mt-6 text-zinc-400 leading-relaxed max-w-md">
+            GenControl S.A. desarrolla ingeniería, equipamiento y servicios industriales para
+            empresas que requieren resultados confiables.
+          </p>
+
+          <div class="mt-6 flex flex-col gap-2 text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+              <!-- Icono: Ubicación -->
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>
+              <span data-info="address">Córdoba, Argentina</span>
+            </div>
+          </div>
+
+          <!-- Redes -->
+          <div class="mt-6 flex items-center gap-3">
+            <a href="#" data-link="linkedin" aria-label="LinkedIn" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <!-- Icono: LinkedIn -->
+             <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="#" data-link="instagram" aria-label="Instagram" class="w-9 h-9 rounded-md border border-border bg-bg/40 hover:border-brand-500 hover:bg-brand-700/20 transition-colors flex items-center justify-center">
+              <!-- Icono: Instagram -->
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div class="lg:col-span-3">
+          <div class="tag-mono text-brand-400">Navegación</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="../#quienes-somos" class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Empresa</a></li>
+            <li><a href="../#servicios"     class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Servicios</a></li>
+            <li><a href="../#gases"         class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Especialidades</a></li>
+            <li><a href="../#clientes"      class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Empresas</a></li>
+            <li><a href="../#sectores"      class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Sectores</a></li>
+            <li><a href="../#contacto"      class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Categorías del catálogo -->
+        <div class="lg:col-span-4">
+          <div class="tag-mono text-brand-400">Categorías del catálogo</div>
+          <ul class="mt-5 space-y-3">
+            <li><a href="#grupos"         class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Grupos Electrógenos</a></li>
+            <li><a href="#compresores"    class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Compresores</a></li>
+            <li><a href="#elevacion"      class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Sistemas de Elevación</a></li>
+            <li><a href="#automatizacion" class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Automatización &amp; Tableros</a></li>
+            <li><a href="../#representacion" class="text-sm text-zinc-400 hover:text-blue-400 transition-colors">Representación MGSC</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Línea separadora + créditos finales (idénticos a la home) -->
+      <div class="mt-14 pt-8 border-t border-border flex flex-col-reverse md:flex-row items-center justify-between gap-5 text-sm">
+        <div class="text-zinc-500" data-info="copyright">
+          © <span data-info="year">2025</span> GenControl S.A. · Todos los derechos reservados.
+        </div>
+        <div class="text-zinc-400 flex items-center gap-2 flex-wrap justify-center">
+          <span>Hecho por</span>
+          <a href="#" data-link="benjamin" class="font-semibold text-white hover:text-brand-400 transition-colors">Benjamín Rincón</a>
+          <span class="text-zinc-600">&</span>
+          <a href="#" data-link="santiago" class="font-semibold text-white hover:text-brand-400 transition-colors">Santiago Rodríguez</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================ -->
+  <!--  FLOATING BUTTONS · WhatsApp + Email · Mismo patrón home     -->
+  <!-- ============================================================ -->
+  <div class="fixed right-5 bottom-5 z-40 flex flex-col items-end gap-3">
+
+    <!-- WhatsApp -->
+    <a href="#" data-link="whatsapp" aria-label="WhatsApp"
+       class="fab group flex items-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 pl-3 pr-4 py-3 hover:bg-emerald-400">
+      <span class="relative flex w-6 h-6 items-center justify-center">
+        <span class="absolute inset-0 rounded-full bg-emerald-400/60 animate-ping"></span>
+        <!-- Icono: WhatsApp (Lucide: círculo de mensaje) -->
+        <i data-lucide="message-circle" class="w-5 h-5 relative"></i>
+      </span>
+      <span class="label text-sm font-semibold">WhatsApp</span>
+    </a>
+
+    <!-- Email -->
+    <a href="#" data-link="email" aria-label="Email"
+       class="fab group flex items-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 pl-3 pr-4 py-3 hover:bg-brand-500">
+      <!-- Icono: Email -->
+      <i data-lucide="mail" class="w-5 h-5"></i>
+      <span class="label text-sm font-semibold">Email</span>
+    </a>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!--  JAVASCRIPT · Sin IA / Sin chat · Solo lógica del catálogo   -->
+  <!-- ============================================================ -->
+  <script>
+    'use strict';
+
+    /* =====================================================================
+       CONFIG · Datos de la empresa (mismo objeto que la home)
+       ===================================================================== */
+    const CONFIG = {
+      company: {
+        name:     'GenControl S.A.',
+        phone:    '+54 351 555-1234',
+        phoneRaw: '+543515551234',
+        whatsapp: '+543515551234',
+        email:    'info@gencontrol.com.ar',
+        address:  'Villa Ballester 4063 B. Carrara, Córdoba',
+        hours:    'Lun a Vie · 08:00 a 17:00',
+      },
+      social: {
+        linkedin:  'https://www.linkedin.com/company/gencontrol-servicios-industriales',
+        instagram: '#',
+      },
+      authors: {
+        benjamin: {
+          name: 'Benjamín Rincón',
+          url:  'https://instagram.com/benjaa.rincon',
+        },
+        santiago: {
+          name: 'Santiago Rodríguez',
+          url:  'https://instagram.com/santiii.rodriguezz._',
+        },
+      },
+    };
+
+
+    /* =====================================================================
+       HELPERS
+       ===================================================================== */
+    const $  = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+
+    /* =====================================================================
+       0) LUCIDE ICONS
+       ===================================================================== */
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+
+
+    /* =====================================================================
+       1) REVEAL ANIMATIONS
+       ===================================================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    $$('.reveal').forEach((el) => revealObserver.observe(el));
+
+
+    /* =====================================================================
+       2) HEADER · Comportamiento al hacer scroll (idéntico a la home)
+       ===================================================================== */
+    const header      = document.querySelector('header');
+    const headerInner = $('#header-inner');
+    let lastScroll    = 0;
+
+    window.addEventListener('scroll', () => {
+      const cur = window.pageYOffset;
+      if (cur <= 0) {
+        header.style.transform = 'translateY(0)';
+        return;
+      }
+      if (cur > lastScroll && cur > 100) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      lastScroll = cur;
+    });
+
+    // Sombra del header según scroll
+    const setHeaderState = () => {
+      if (window.scrollY > 30) {
+        headerInner.classList.add('shadow-lg');
+        headerInner.classList.remove('shadow-sm');
+      } else {
+        headerInner.classList.remove('shadow-lg');
+        headerInner.classList.add('shadow-sm');
+      }
+    };
+    setHeaderState();
+    window.addEventListener('scroll', setHeaderState, { passive: true });
+
+
+    /* =====================================================================
+       3) MENÚ MÓVIL
+       ===================================================================== */
+    const menuBtn   = $('#menu-toggle');
+    const mobileNav = $('#mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileNav.classList.contains('hidden');
+      mobileNav.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+    $$('#mobile-menu a').forEach((a) => a.addEventListener('click', () => {
+      mobileNav.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+
+    /* =====================================================================
+       4) INYECCIÓN DE DATOS · CONFIG → DOM
+       ===================================================================== */
+    $$('[data-info]').forEach((el) => {
+      const key = el.dataset.info;
+      const map = {
+        phone:   CONFIG.company.phone,
+        email:   CONFIG.company.email,
+        address: CONFIG.company.address,
+        hours:   CONFIG.company.hours,
+        year:    new Date().getFullYear(),
+      };
+      if (map[key]) el.textContent = map[key];
+    });
+
+    const copyrightEl = document.querySelector('[data-info="copyright"]');
+    if (copyrightEl) {
+      copyrightEl.innerHTML = `© ${new Date().getFullYear()} ${CONFIG.company.name} · Todos los derechos reservados.`;
+    }
+
+    $$('[data-link]').forEach((el) => {
+      const type = el.dataset.link;
+      let href = '#';
+      switch (type) {
+        case 'phone':    href = `tel:${CONFIG.company.phoneRaw}`; break;
+        case 'email':    href = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent('Consulta desde el sitio web')}`; break;
+        case 'whatsapp': href = `https://wa.me/${CONFIG.company.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer una consulta técnica.')}`; break;
+        case 'linkedin': href = CONFIG.social.linkedin; break;
+        case 'instagram':href = CONFIG.social.instagram; break;
+        case 'benjamin': href = CONFIG.authors.benjamin.url; el.textContent = CONFIG.authors.benjamin.name; break;
+        case 'santiago': href = CONFIG.authors.santiago.url; el.textContent = CONFIG.authors.santiago.name; break;
+      }
+      el.setAttribute('href', href);
+      if (['benjamin', 'santiago', 'linkedin', 'instagram'].includes(type) && href !== '#') {
+        el.target = '_blank';
+        el.rel = 'noopener noreferrer';
+      }
+    });
+
+
+    /* =====================================================================
+       5) BUSCADOR · Filtrado en vivo (limpio, sin animaciones IA)
+       ===================================================================== */
+    const searchForm  = $('#search-form');
+    const searchInput = $('#search-input');
+
+    function runCatalogFilter() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      const cats   = $$('[data-filter="categoria"]:checked').map(c => c.value);
+      const stocks = $$('[data-filter="stock"]:checked').map(c => c.value);
+      const marcas = $$('[data-filter="marca"]:checked').map(c => c.value);
+
+      const cards = $$('[data-product]');
+      let shown = 0;
+      cards.forEach((card) => {
+        const c = card.dataset.categoria;
+        const s = card.dataset.stock;
+        const m = card.dataset.marca;
+        const name  = (card.dataset.name  || '').toLowerCase();
+        const marca = (card.dataset.marca || '').toLowerCase();
+        const id    = (card.dataset.id    || '').toLowerCase();
+
+        const matchQuery = !query || name.includes(query) || marca.includes(query) || id.includes(query);
+        const matchFilter = cats.includes(c) && stocks.includes(s) && marcas.includes(m);
+        const ok = matchQuery && matchFilter;
+        card.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+
+      $('#results-count').textContent = shown;
+      const empty = $('#empty-state');
+      if (shown === 0) empty.classList.remove('hidden');
+      else empty.classList.add('hidden');
+
+      // Mostrar u ocultar botón "Limpiar filtros"
+      const hasActiveFilter = $$('[data-filter]').some(cb => !cb.checked);
+      const clearBtn = $('#clear-filters');
+      if (clearBtn) clearBtn.classList.toggle('hidden', !hasActiveFilter && !query);
+    }
+
+    // Filtrado en vivo al escribir
+    searchInput.addEventListener('input', runCatalogFilter);
+    // Submit del form (Enter o clic en "Buscar")
+    searchForm.addEventListener('submit', (e) => { e.preventDefault(); runCatalogFilter(); });
+
+    // Chips de búsquedas populares
+    $$('[data-suggestion]').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        searchInput.value = chip.dataset.suggestion;
+        runCatalogFilter();
+        searchInput.focus();
+      });
+    });
+
+
+    /* =====================================================================
+       6) FILTROS DE CATEGORÍA / STOCK / MARCA
+       ===================================================================== */
+    $$('[data-filter]').forEach((cb) => {
+      cb.addEventListener('change', runCatalogFilter);
+    });
+
+    // Botón limpiar filtros
+    const clearFilters = () => {
+      $$('[data-filter]').forEach((cb) => { cb.checked = true; });
+      searchInput.value = '';
+      runCatalogFilter();
+    };
+    const clearBtnTop = $('#clear-filters');
+    if (clearBtnTop) clearBtnTop.addEventListener('click', clearFilters);
+    const emptyClear = $('#empty-clear');
+    if (emptyClear) emptyClear.addEventListener('click', clearFilters);
+
+
+    /* =====================================================================
+       7) ORDENAMIENTO
+       ===================================================================== */
+    $('#sort-select').addEventListener('change', (e) => {
+      const mode = e.target.value;
+      const grid = $('#products-grid');
+      const cards = $$('[data-product]', grid);
+      cards.sort((a, b) => {
+        if (mode === 'name') {
+          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        } else if (mode === 'stock') {
+          const order = { inmediato: 1, pedido: 2, medida: 3 };
+          return (order[a.dataset.stock] || 9) - (order[b.dataset.stock] || 9);
+        }
+        return 0;
+      });
+      cards.forEach((c) => grid.appendChild(c));
+    });
+
+
+    /* =====================================================================
+       8) ACCESIBILIDAD · Escape cierra menú móvil
+       ===================================================================== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
+        mobileNav.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+  </script>
+
+</body>
+</html>
